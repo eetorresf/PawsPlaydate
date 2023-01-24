@@ -8,19 +8,47 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var email = ""
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            VStack {
+                Image("logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 150, height: 150)
+                
+                VStack {
+                    TextField("Email Address", text: $email)
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                    SecureField("Email Address", text: $email)
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("Sign In")
+                            .foregroundColor(Color.purple)
+                            .frame(width: 200, height: 50)
+                            .background(Color.white)
+                            .cornerRadius(8)
+                    })
+                    
+                }
+                .padding()
+                
+                Spacer()
+            }
+            .navigationTitle("Sign In")
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
     }
 }
