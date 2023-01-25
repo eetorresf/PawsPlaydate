@@ -15,7 +15,7 @@ struct SelectButton: View {
     var body: some View {
         ZStack {
             Capsule()
-                .frame(height: 30)
+                .frame(width: 80, height: 35)
                 .foregroundColor(isSelected ? color : .blue)
             Text(text)
                 .foregroundColor(.white)

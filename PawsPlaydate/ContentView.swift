@@ -5,6 +5,7 @@
 //  Created by Erika Dey on 1/24/23.
 //
 
+import PhotosUI
 import SwiftUI
 import FirebaseAuth
 
@@ -187,98 +188,122 @@ struct SignUpView: View {
     }
 }
 
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+            
+            EditProfileView()
+
 //            .preferredColorScheme(.dark)
     }
 }
 
-struct ProfileView: View {
+struct EditProfileView: View {
     
     @State private var petName = ""
     @State private var breed = ""
     @State private var birthdate = Date()
     @State private var spayedNeutered = false
+    @State private var petBio = ""
     
     @State private var isMale = false
     @State private var isFemale = false
-//    @State private var showAlert = false
-//    @State private var alertText = ""
+    
+    
+    @State var changeProfileImage = false
+    @State var openCameraRoll = false
+    @State var imageSelected = UIImage()
+
     
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("Photo")){
-                    ZStack{
-                        Button(action: {
-                            
-                        }, label: {
-                            Image(systemName: "dog.outline")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 150, height: 150)
-//                                .clipShape(Circle())
-//                                .font(.system(size: 64))
-                                .foregroundColor(.gray)
-                                .padding()
-                        })
-//                        Image(systemName: "plus")
-//                            .frame(width: 30, height: 30)
-//                            .foregroundColor(.purple)
-//                            .background(Color.white)
-                    }
-                }
-                Section(header: Text("Pet's Information")){
-                    TextField("Pet Name", text: $petName)
-                    TextField("Breed", text: $breed)
-                    DatePicker("Birthdate", selection: $birthdate, displayedComponents: .date)
-                }
-                Section(header: Text("About")){
-                    Toggle("Spayed/Neutered", isOn: $spayedNeutered)
-                        .toggleStyle(SwitchToggleStyle(tint: .purple))
-                    
-                    
-                }
-                VStack(spacing: 20) {
-                    Text("Sex")
-                    HStack {
-                        SelectButton(isSelected: $isMale, color: .purple, text: "Male")
-                            .onTapGesture {
-                                isMale.toggle()
-                                
-                                if isMale {
-                                    isFemale = false
+
+                
+                Form {
+                    Section(header: Text("Photo")){
+                        ZStack(alignment: .bottomTrailing){
+                            Button(action: {
+                                changeProfileImage = true
+                                openCameraRoll = true
+                            }, label: {
+                                if changeProfileImage {
+                                    Image(uiImage: imageSelected)
+                                        .resizable()
+                                        .frame(width: 120, height: 120)
+                                } else {
+                                    Image("dog")
+                                        .resizable()
+                                        .frame(width: 120, height: 120)
+                                        .background(Color.gray)
                                 }
+                            })
+                            Image(systemName: "plus")
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.purple)
+                                .background(Color.white)
+                                .clipShape(Circle())
+                        }
+                        .sheet(isPresented: $openCameraRoll) {
+                            ImagePicker(selectedImage: $imageSelected, sourceType: .photoLibrary)
+                        }
+                    }
+                    Section(header: Text("Pet's Information")){
+                        TextField("Pet Name", text: $petName)
+                        TextField("Breed", text: $breed)
+                        DatePicker("Birthdate", selection: $birthdate, displayedComponents: .date)
+                    }
+                    Section(header: Text("About")){
+                        Toggle("Spayed/Neutered", isOn: $spayedNeutered)
+                            .toggleStyle(SwitchToggleStyle(tint: .purple))
+                        
+                        
+                    }
+                    Section(header: Text("Sex")){
+                        
+                        VStack(spacing: 20) {
+                            HStack {
+                                SelectButton(isSelected: $isMale, color: .purple, text: "Male")
+                                    .onTapGesture {
+                                        isMale.toggle()
+                                        
+                                        if isMale {
+                                            isFemale = false
+                                        }
+                                    }
+                                SelectButton(isSelected: $isFemale, color: .purple, text: "Female")
+                                    .onTapGesture {
+                                        isFemale.toggle()
+                                        
+                                        if isFemale {
+                                            isMale = false
+                                        }
+                                    }
                             }
-                        SelectButton(isSelected: $isFemale, color: .purple, text: "Female")
-                            .onTapGesture {
-                                isFemale.toggle()
-                                
-                                if isFemale {
-                                    isMale = false
-                                }
-                            }
+                        }
+                    }
+                    .listRowBackground(Color(UIColor.systemGroupedBackground))
+                    Section(header: Text("Bio")){
+                        TextField("Tell us about your pet", text: $petBio, axis: .vertical)
+                            .lineLimit(5...10)
                     }
                 }
-                .padding()
-            }
-            .navigationTitle("Edit Profile")
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button {
-                        hideKeyboard()
-                    } label: {
-                        Image(systemName: "keyboard.chevron.compact.down")
+                .navigationTitle("Edit Profile")
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        Button {
+                            hideKeyboard()
+                        } label: {
+                            Image(systemName: "keyboard.chevron.compact.down")
+                        }
+                        Button("Save", action: saveUser)
                     }
-                    Button("Save", action: saveUser)
                 }
             }
-        }
-        .accentColor(.purple)
+        
     }
-    func saveUser() {
-        print("User Saved")
+        func saveUser() {
+            print("User Saved")
+        
     }
 }
 
