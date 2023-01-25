@@ -59,7 +59,10 @@ struct ContentView: View {
             if viewModel.signedIn {
                 VStack {
                     Text("You are signed in.")
-                    
+                    NavigationLink(destination: EditProfileView()) {
+                        Text("Edit Profile")
+                    }
+               
                     Button(action: {
                         viewModel.signOut()
                     }, label: {
