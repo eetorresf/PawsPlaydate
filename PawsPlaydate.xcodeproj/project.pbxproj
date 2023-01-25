@@ -15,6 +15,7 @@
 		99A49BFF2980637E00BEFB3F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 99A49BFE2980637E00BEFB3F /* FirebaseAnalytics */; };
 		99A49C012980637E00BEFB3F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 99A49C002980637E00BEFB3F /* FirebaseAuth */; };
 		99A49C032980637E00BEFB3F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 99A49C022980637E00BEFB3F /* FirebaseFirestore */; };
+		99A49C0529818A1100BEFB3F /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49C0429818A1100BEFB3F /* SelectButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		99A49BF1298061DC00BEFB3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99A49BF4298061DC00BEFB3F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		99A49BFB298062FA00BEFB3F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		99A49C0429818A1100BEFB3F /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				99A49BFB298062FA00BEFB3F /* GoogleService-Info.plist */,
 				99A49BED298061DB00BEFB3F /* PawsPlaydateApp.swift */,
 				99A49BEF298061DB00BEFB3F /* ContentView.swift */,
+				99A49C0429818A1100BEFB3F /* SelectButton.swift */,
 				99A49BF1298061DC00BEFB3F /* Assets.xcassets */,
 				99A49BF3298061DC00BEFB3F /* Preview Content */,
 			);
@@ -155,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99A49C0529818A1100BEFB3F /* SelectButton.swift in Sources */,
 				99A49BF0298061DB00BEFB3F /* ContentView.swift in Sources */,
 				99A49BEE298061DB00BEFB3F /* PawsPlaydateApp.swift in Sources */,
 			);
