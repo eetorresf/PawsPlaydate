@@ -20,19 +20,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct PawsPlaydateApp: App {
-    @StateObject var dataManager = DataManager()
+//    @StateObject var dataManager = DataManager()
 //    init() {
 //        FirebaseApp.configure()
 //    }
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @State var petVM = PetViewModel()
+//    @State var petVM = PetViewModel()
     
     var body: some Scene {
         WindowGroup {
-            let viewModel = AppViewModel()
+//            let viewModel = AppViewModel()
+            let user = UserViewModel()
+            let petVM = PetViewModel()
             ContentView()
-                .environmentObject(viewModel)
-                .environmentObject(dataManager)
+//                .environmentObject(viewModel)
+                .environmentObject(user)
+//                .environmentObject(dataManager)
                 .environmentObject(petVM)
         }
     }

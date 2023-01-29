@@ -11,6 +11,8 @@ struct PhotoView: View {
     @State private var photo = Photo()
     var uiImage: UIImage
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var petVM: PetViewModel
+    var pet: Pet
     
     var body: some View {
         NavigationStack {
@@ -20,7 +22,7 @@ struct PhotoView: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 200, height: 200)
+                    .frame(width: 300, height: 350)
                 
                 Spacer()
                 
@@ -33,14 +35,25 @@ struct PhotoView: View {
                         dismiss()
                     }
                 }
+                ToolbarItem(placement: .automatic) {
+                    Button("Save") {
+                        Task {
+                            let success = await petVM.saveImage(pet: pet, photo: photo, image: uiImage)
+                            if success {
+                                dismiss()
+                            }
+                        }
+                    }
+                }
             }
         }
         
     }
 }
 
-struct PhotoView_Previews: PreviewProvider {
-    static var previews: some View {
-        PhotoView(uiImage: UIImage(named: "hakai") ?? UIImage())
-    }
-}
+//struct PhotoView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PhotoView(uiImage: UIImage(named: "hakai") ?? UIImage(), pet: Pet())
+//            .environmentObject(PetViewModel())
+//    }
+//}

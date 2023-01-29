@@ -118,16 +118,21 @@ struct EditProfileView: View {
                     } label: {
                         Image(systemName: "keyboard.chevron.compact.down")
                     }
-                    Button("Save") {
-                        Task {
-                            let success = await petVM.savePet(pet: pet)
-                            if success {
-                                dismiss()
-                            } else {
-                                print("sad")
-                            }
-                            
-                        }
+//                    Button("Save") {
+//                        Task {
+//                            let success = await petVM.addPet(pet: pet)
+//                            if success {
+//                                dismiss()
+//                            } else {
+//                                print("sad")
+//                            }
+//
+//                        }
+//                    }
+//                    Button(action: {
+//                        petVM.createPet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio, user: <#String#>)
+//                    }) {
+//                        Text("Add Pet")
                     }
                 }
                 
@@ -135,7 +140,7 @@ struct EditProfileView: View {
         }
         
     }
-}
+//}
 
 
 //extension View {
