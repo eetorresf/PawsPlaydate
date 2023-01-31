@@ -12,10 +12,14 @@ import FirebaseAuth
 import UIKit
 
 
+
 class PetViewModel: ObservableObject {
     
     @Published var pet = Pet()
-//    @Published var pet: Pet?
+    @Published var photo = Photo()
+//    var image: UIImage
+    @Published var pets = [Pet]()
+
         
     private let db = Firestore.firestore()
 
@@ -24,22 +28,45 @@ class PetViewModel: ObservableObject {
         auth.currentUser?.uid
     }
     
-    func createPet(petName: String, breed: String, age: String, fixed: Bool, isMale: Bool, isFemale: Bool, bio: String, user: String) {
-        DispatchQueue.main.async {
-            self.addPet(Pet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio, user: self.uuid ?? ""))
-        }
+    func createPet(petName: String, breed: String, age: String, fixed: Bool, isMale: Bool, isFemale: Bool, bio: String, completion: ((String) -> Void)? = nil) {
+        pet = Pet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio)
+            self.addPet(pet, completion: completion)
+        
+        
     }
     
     
-    
-    private func addPet(_ pet: Pet) {
+    private func addPet(_ pet: Pet, completion: ((String) -> Void)? = nil) {
+        let dataRef = db.collection("Users").document(self.uuid!).collection("pets").document()
         do {
-            let _ = try db.collection("Pets").document(self.uuid!).setData(from: pet)
-            
-        } catch {
-            print("error adding pet")
+            try? dataRef.setData(from: pet) { err in
+
+                if err != nil {
+                    print("Loser :( ")
+                }
+                completion?(self.uuid!)
+            }
         }
     }
+//    private func addPet(_ pet: Pet, completion: ((String) -> Void)? = nil) {
+////        let dataRef = db.collection("Users").document(self.uuid!)
+//        do {
+//            // eventually replace self.uuid with petId
+////            try db.collection("Pets").document(self.uuid!).setData(from: pet) { err in
+//            try db.collection("Pets").document(pet.petID!).collection("pets").document() { err in
+//                // replace self.uuid with pet id
+//                self.pet.petID = self.uuid!
+//                completion?(self.uuid!)
+////            try dataRef.updateData(["pets": FieldValue.arrayUnion([pet]) ]) { err in
+////                completion?(self.uuid!)
+//
+//            }
+//
+//        } catch {
+//            print("error adding pet")
+//        }
+//    }
+
     private func updatePet() {
         do {
             let _ = try db.collection("Pets").document(self.uuid!).setData(from: pet)
@@ -57,51 +84,49 @@ class PetViewModel: ObservableObject {
             }
         }
     }
+    func fetchPets() {
+        db.collection("Pets").addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            
+            self.pets = documents.map{ (queryDocumentSnapshot) -> Pet in
+                let data = queryDocumentSnapshot.data()
+                
+                let petName = data["petName"] as? String ?? ""
+                let breed = data["breed"] as? String ?? ""
+                let age = data["age"] as? String ?? ""
+                let fixed = data["fixed"] as? Bool ?? false
+                let isMale = data["isMale"] as? Bool ?? false
+                let isFemale = data["isFemale"] as? Bool ?? false
+                let bio = data["bio"] as? String ?? ""
+                
+                return Pet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio)
+                
+            }
+        }
+    }
     
-//    func savePet(pet: Pet) async -> Bool {
-//        let db = Firestore.firestore()
-//
-//        
-//        if let id = pet.id {
-//            do {
-//                try await db.collection("Pets").document(id).setData(pet.dictionary)
-//                print("yay!")
-//                return true
-//            } catch {
-//                print("Error could not update \(error.localizedDescription)")
-//                return false
-//            }
-//        } else {
-//            do {
-//                try await db.collection("Pets").addDocument(data: pet.dictionary)
-////                await saveImage(pet: pet, photo: photo, image: uiImage)
-//                print("yay new data!")
-//                return true
-//            } catch {
-//                print("Error could not create \(error.localizedDescription)")
-//                return false
-//            }
-//        }
-//        
-//    }
-    func saveImage(pet: Pet, photo: Photo, image: UIImage) async -> Bool {
-        guard let petID = pet.id else {
+
+    func saveImage(image: UIImage) async -> Bool {
+        guard let petID = pet.petID else {
             print("pet.id == nil")
             return false
         }
         let photoName = UUID().uuidString
         let storage = Storage.storage()
         let storageRef = storage.reference().child("\(petID)/\(photoName).jpeg")
-        
+
         guard let resizedImage = image.jpegData(compressionQuality: 0.2) else {
             print("could not resize")
             return false
         }
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
-        
+
         var imageURLString = ""
-        
+
         do {
             let _ = try await storageRef.putDataAsync(resizedImage, metadata: metadata)
             do {
@@ -117,7 +142,7 @@ class PetViewModel: ObservableObject {
         }
         let db = Firestore.firestore()
         let collectionString = "Pets/\(petID)/photos"
-        
+
         do {
             var newPhoto = photo
             newPhoto.imageURLString = imageURLString
@@ -130,3 +155,5 @@ class PetViewModel: ObservableObject {
         }
     }
 }
+
+

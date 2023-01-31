@@ -5,8 +5,9 @@
 //  Created by Erika Dey on 1/26/23.
 //
 
-//import SwiftUI
-//import Firebase
+import SwiftUI
+import Firebase
+import FirebaseStorage
 //
 //class DataManager: ObservableObject {
 //    @Published var pets: [Pet] = []
@@ -46,3 +47,22 @@
 //        }
 //    }
 //}
+
+//class DataManager: NSObject {
+//
+//    let auth: Auth
+//    let storage: Storage
+//
+//    static let shared = DataManager()
+//
+//    override init() {
+////        FirebaseApp.configure()
+//
+//        self.auth = Auth.auth()
+//        self.storage = Storage.storage()
+//
+//        super.init()
+//    }
+//}
+
+

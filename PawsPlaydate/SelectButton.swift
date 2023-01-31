@@ -23,8 +23,3 @@ struct SelectButton: View {
     }
 }
 
-struct SelectButton_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectButton(isSelected: .constant(false), color: .blue, text: "Option")
-    }
-}

@@ -30,19 +30,16 @@ class UserViewModel: ObservableObject {
     func signIn(email: String, password: String) {
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else { return }
-            DispatchQueue.main.async {
-                self?.sync()
-            }
+            self?.sync()
         }
     }
     
     func signUp(email: String, password: String, username: String) {
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {return}
-            DispatchQueue.main.async {
-                self?.add(User(id: self?.uuid ?? "", username: username))
+            self?.add(User(id: self?.uuid ?? "", username: username))
                 self?.sync()
-            }
+
         }
     }
         func signOut() {
@@ -59,11 +56,14 @@ class UserViewModel: ObservableObject {
         guard userIsAuthenticated else { return }
         db.collection("Users").document(self.uuid!).getDocument { (document, error) in
             guard document != nil, error == nil else {return}
+            DispatchQueue.main.async {
             do {
                 try self.user = document!.data(as: User.self)
             } catch {
                 print("Sync error: \(error)")
             }
+        }
+
         }
     }
     private func add(_ user: User) {
@@ -72,7 +72,7 @@ class UserViewModel: ObservableObject {
             let _ = try db.collection("Users").document(self.uuid!).setData(from: user)
             
         } catch {
-            print("error adding")
+            print("error adding user")
         }
     }
     private func update() {
@@ -80,7 +80,7 @@ class UserViewModel: ObservableObject {
         do {
             let _ = try db.collection("Users").document(self.uuid!).setData(from: user)
         } catch {
-            print("error updating!")
+            print("error updating user!")
         }
     }
 }

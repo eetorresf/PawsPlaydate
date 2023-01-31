@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 struct Photo: Identifiable, Codable {
     @DocumentID var id: String?
     var imageURLString = ""
-    var user = Auth.auth().currentUser?.email ?? ""
+    var user = ""
     
     var dictionary: [String: Any] {
         return ["imageURLString": imageURLString, "user": user]
