@@ -94,6 +94,7 @@ class PetViewModel: ObservableObject {
             self.pets = documents.map{ (queryDocumentSnapshot) -> Pet in
                 let data = queryDocumentSnapshot.data()
                 
+                let id = data["id"] as? String ?? ""
                 let petName = data["petName"] as? String ?? ""
                 let breed = data["breed"] as? String ?? ""
                 let age = data["age"] as? String ?? ""
@@ -102,21 +103,26 @@ class PetViewModel: ObservableObject {
                 let isFemale = data["isFemale"] as? Bool ?? false
                 let bio = data["bio"] as? String ?? ""
                 
-                return Pet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio)
-                
+                return Pet(id: id, petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio)
             }
         }
     }
     
 
     func saveImage(image: UIImage) async -> Bool {
-        guard let petID = pet.petID else {
-            print("pet.id == nil")
-            return false
+//        guard let petID = pet.petID else {
+//            print("pet.id == nil")
+//            return false
+//        }
+
+        let auth = Auth.auth()
+        var uuid: String? {
+            auth.currentUser?.uid
         }
         let photoName = UUID().uuidString
         let storage = Storage.storage()
-        let storageRef = storage.reference().child("\(petID)/\(photoName).jpeg")
+        let storageRef = storage.reference().child("\(pet.id)/\(photoName).jpeg")
+
 
         guard let resizedImage = image.jpegData(compressionQuality: 0.2) else {
             print("could not resize")
@@ -141,7 +147,8 @@ class PetViewModel: ObservableObject {
             return false
         }
         let db = Firestore.firestore()
-        let collectionString = "Pets/\(petID)/photos"
+        let collectionString = "Users/\(self.uuid!)/pets/\(pet.id)/photos"
+//        let collectionString = "Pets/\(petID)/photos"
 
         do {
             var newPhoto = photo

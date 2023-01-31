@@ -96,7 +96,7 @@ struct PetDetailView: View {
                                 Button("Next") {
                                     petVM.createPet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio) { uuid in
                                         DispatchQueue.main.async {
-                                            petId = uuid
+//                                            petId = uuid
                                             isTapped.toggle()
                                         }
                                     }

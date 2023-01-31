@@ -11,9 +11,9 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 
 struct Pet: Identifiable, Codable {
-    @DocumentID var id: String?
+    @DocumentID var id: String? 
         
-        var petID: String? 
+//        var petID: String? 
         var petName = ""
         var breed = ""
         var age = ""
