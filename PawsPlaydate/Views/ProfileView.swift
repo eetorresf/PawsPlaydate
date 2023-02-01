@@ -8,34 +8,46 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
     @EnvironmentObject var user: UserViewModel
-    @EnvironmentObject var petVM: PetViewModel
     
     var body: some View {
-        VStack {
-            NavigationStack {
-                
-                Text("Successfully logged in \(user.user?.username ?? "")")
-                    .toolbar {
-                        ToolbarItemGroup(placement: .bottomBar) {
-                            NavigationLink(destination: PetDetailView()) {
-                                Text("Your Pets")
-                            }
-                            Button("Chat") {
-                                print("Chat")
-                            }
-                            NavigationLink(destination: ViewMyPets()) {
-                                Text("Friends")
-                            }
-                            Button(action: {
-                                user.signOut()
-                            }) {
-                                Text("Sign Out")
-                            }
-                        }
-                    }
-            }
-        }
+        Text("Welcome \(user.user?.username ?? "")")
     }
 }
 
+
+
+//        VStack {
+//            NavigationStack {
+//
+//                Text("Welcome \(user.user?.username ?? "")")
+//                    .bold()
+//                    .font(.largeTitle)
+//                    .frame(width: 100, height: 100, alignment: .leading)
+//                    .toolbar {
+//                        ToolbarItemGroup(placement: .bottomBar) {
+//                            NavigationLink(destination: PetDetailView()) {
+////                                Text("Your Pets")
+//                                Image("user")
+//                            }
+//                            Button(action: {
+//                                print("chat")
+//                            }) {
+////                                Text("Sign Out")
+//                                Image("chat")
+//                            }
+//                            NavigationLink(destination: ViewMyPets()) {
+////                                Text("Friends")
+//                                Image("paw")
+//                            }
+//                            Button(action: {
+//                                user.signOut()
+//                            }) {
+////                                Text("Sign Out")
+//                                Image("exit")
+//                            }
+//                        }
+//                    }
+//            }
+//        }

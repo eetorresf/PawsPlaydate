@@ -11,7 +11,7 @@ struct AuthenticationView: View {
     var body: some View {
         VStack {
             SignInView()
-            NavigationLink("Sign Up!", destination: SignUpView())
+//            NavigationLink("Sign Up!", destination: SignUpView())
         }
     }
 }
@@ -23,21 +23,32 @@ struct SignInView: View {
     
     var body: some View {
         VStack {
-            Spacer()
             Text("Paws Playdate")
-            Image("logo")
+                .font(.largeTitle).foregroundColor(Color.white)
+                .padding([.top, .bottom], 40)
+                .shadow(color: .black, radius: 4, x: 0, y: 4)
+            Image("dog")
                 .resizable()
-                .scaledToFit()
-                .frame(width: 150, height: 150)
+                .frame(width: 250, height: 250)
+                .padding(.bottom, 50)
+//                .shadow(color: .black, radius: 5, x: 0, y: 5)
             Spacer()
-            VStack {
-                
+//                .frame(height: 75)
+            VStack(alignment: .leading, spacing: 15) {
+//                Spacer()
+//                    .frame(height: 75)
                 TextField("Email", text: $email)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
+                    .padding()
+                    .background(Color.white)
                 SecureField("Password", text: $password)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
+                    .padding()
+                    .background(Color.white)
+            }
+            .padding([.leading, .trailing], 25)
                 Button(action: {
                     guard !email.isEmpty, !password.isEmpty else {
                         return
@@ -45,16 +56,27 @@ struct SignInView: View {
                     user.signIn(email: email, password: password)
                 }) {
                     Text("Sign In")
-                }
-                .foregroundColor(Color.blue)
-                .frame(width: 200, height: 50)
-                .background(Color.white)
-                .cornerRadius(8)
+                        .font(.headline)
+//                        .foregroundColor(Color.white)
+//                        .frame(width: 200, height: 50)
+//                        .cornerRadius(8)
+                        .padding()
+                }.background(Color.black)
+                .foregroundColor(Color.white)
+                .cornerRadius(10)
+//                .padding()
+//            Spacer()
+
+            NavigationLink("Sign Up!", destination: SignUpView())
+                .foregroundColor(Color.white)
             }
             
+        .background(
+            RadialGradient(gradient: Gradient(colors: [.blue, .purple]), center: .center, startRadius: 100, endRadius: 470).edgesIgnoringSafeArea(.all))
         }
     }
-}
+
+
 
 struct SignUpView: View {
     @EnvironmentObject var user: UserViewModel
@@ -67,20 +89,53 @@ struct SignUpView: View {
     
     var body: some View {
         VStack {
-            TextField("Username", text: $username)
-                .disableAutocorrection(true)
-            TextField("Email", text: $email)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-            SecureField("Password", text: $password)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
+            
+            
+//            Text("Welcome to Paws Playdate")
+//                .font(.title)
+//                .foregroundColor(Color.white)
+            Text("Create an Account")
+                .font(.title)
+                .foregroundColor(Color.white)
+                .padding([.top, .bottom], 40)
+//            Spacer()
+            Image("dog")
+                .resizable()
+                .frame(width: 250, height: 250)
+                .padding(.bottom, 50)
+            Spacer()
+//                .frame(height: 75)
+            VStack(alignment: .leading, spacing: 15) {
+//                Spacer()
+//                    .frame(height: 75)
+                TextField("Username", text: $username)
+                    .disableAutocorrection(true)
+                    .padding()
+                    .background(Color.white)
+                TextField("Email", text: $email)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .padding()
+                    .background(Color.white)
+                SecureField("Password", text: $password)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .padding()
+                    .background(Color.white)
+//                Spacer()
+            }
+            .padding([.leading, .trailing], 25)
             Button(action: {
                 user.signUp(email: email, password: password, username: username)
             }) {
                 Text("Sign Up")
-            }
-            
+            }.background(Color.black)
+                .foregroundColor(Color.white)
+                .cornerRadius(10)
+//                .padding()
         }
+        
+        .background(
+            RadialGradient(gradient: Gradient(colors: [.blue, .purple]), center: .center, startRadius: 100, endRadius: 470).edgesIgnoringSafeArea(.all))
     }
 }

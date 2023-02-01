@@ -18,6 +18,7 @@ struct PhotoDetailView: View {
     @State private var showPhotoViewSheet = false
     @State private var selectedPhoto: PhotosPickerItem?
     @ObservedObject var petVM: PetViewModel
+//    @Environment(\.dismiss) var dismiss
     
     private let auth = Auth.auth()
     var uuid: String? {
@@ -60,10 +61,11 @@ struct PhotoDetailView: View {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
                          Task {
-                            
+
                             await petVM.saveImage(image: imageSelected)
+                            
                         }
-                        
+
                     })
                     {
                         Text("Add Pet")

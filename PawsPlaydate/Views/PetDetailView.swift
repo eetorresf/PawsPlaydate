@@ -82,15 +82,7 @@ struct PetDetailView: View {
                             }
                         }
                         .navigationTitle("Create Profile")
-                        //                        .toolbar {
-                        //                            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        //                                Button(action: {
-                        //                                    petVM.createPet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio, user: user)
-                        //                                }) {
-                        //                                    Text("Add Pet")
-                        //                                }
-                        //                            }
-                        //                        }
+
                         .toolbar {
                             ToolbarItemGroup(placement: .navigationBarTrailing) {
                                 Button("Next") {

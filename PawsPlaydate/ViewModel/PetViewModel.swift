@@ -13,21 +13,24 @@ import UIKit
 
 
 
+
 class PetViewModel: ObservableObject {
     
     @Published var pet = Pet()
     @Published var photo = Photo()
-//    var image: UIImage
+    //    @Published var image = UIImage()
     @Published var pets = [Pet]()
-
-        
+//    var image: UIImage
+    
+    
     private let db = Firestore.firestore()
-
+    
     private let auth = Auth.auth()
     var uuid: String? {
         auth.currentUser?.uid
     }
-    
+
+
     func createPet(petName: String, breed: String, age: String, fixed: Bool, isMale: Bool, isFemale: Bool, bio: String, completion: ((String) -> Void)? = nil) {
         pet = Pet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio)
             self.addPet(pet, completion: completion)
@@ -48,25 +51,6 @@ class PetViewModel: ObservableObject {
             }
         }
     }
-//    private func addPet(_ pet: Pet, completion: ((String) -> Void)? = nil) {
-////        let dataRef = db.collection("Users").document(self.uuid!)
-//        do {
-//            // eventually replace self.uuid with petId
-////            try db.collection("Pets").document(self.uuid!).setData(from: pet) { err in
-//            try db.collection("Pets").document(pet.petID!).collection("pets").document() { err in
-//                // replace self.uuid with pet id
-//                self.pet.petID = self.uuid!
-//                completion?(self.uuid!)
-////            try dataRef.updateData(["pets": FieldValue.arrayUnion([pet]) ]) { err in
-////                completion?(self.uuid!)
-//
-//            }
-//
-//        } catch {
-//            print("error adding pet")
-//        }
-//    }
-
     private func updatePet() {
         do {
             let _ = try db.collection("Pets").document(self.uuid!).setData(from: pet)
@@ -114,7 +98,6 @@ class PetViewModel: ObservableObject {
 //            print("pet.id == nil")
 //            return false
 //        }
-
         let auth = Auth.auth()
         var uuid: String? {
             auth.currentUser?.uid
@@ -149,7 +132,6 @@ class PetViewModel: ObservableObject {
         let db = Firestore.firestore()
         let collectionString = "Users/\(self.uuid!)/pets/\(pet.id)/photos"
 //        let collectionString = "Pets/\(petID)/photos"
-
         do {
             var newPhoto = photo
             newPhoto.imageURLString = imageURLString
@@ -162,5 +144,4 @@ class PetViewModel: ObservableObject {
         }
     }
 }
-
 
