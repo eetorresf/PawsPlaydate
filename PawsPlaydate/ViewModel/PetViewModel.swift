@@ -31,8 +31,8 @@ class PetViewModel: ObservableObject {
     }
 
 
-    func createPet(petName: String, breed: String, age: String, fixed: Bool, isMale: Bool, isFemale: Bool, bio: String, completion: ((String) -> Void)? = nil) {
-        pet = Pet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio)
+    func createPet(petName: String, breed: String, age: String, fixed: Bool, isMale: Bool, isFemale: Bool, bio: String, imageURLString: String, completion: ((String) -> Void)? = nil) {
+        pet = Pet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio, imageURLString: imageURLString)
             self.addPet(pet, completion: completion)
         
         
@@ -47,7 +47,13 @@ class PetViewModel: ObservableObject {
                 if err != nil {
                     print("Loser :( ")
                 }
-                completion?(self.uuid!)
+                dataRef.getDocument { documentSnapshot, error in
+                    do {
+                        
+                        self.pet = try! documentSnapshot!.data(as: Pet.self)
+                    }
+                    completion?(dataRef.documentID)
+                }
             }
         }
     }
@@ -58,11 +64,25 @@ class PetViewModel: ObservableObject {
             print("error updating pet!")
         }
     }
+    private func updateImageURL(imageURLString: String) {
+        let dataRef = db.collection("Users").document(self.uuid!).collection("pets").document(pet.id!)
+        
+        
+        dataRef.updateData([
+            "imageURLString": imageURLString
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
     private func syncPet() {
         db.collection("Pets").document(self.uuid!).getDocument { (document, error) in
             guard document != nil, error == nil else {return}
             do {
-                try self.pet = document!.data(as: Pet.self)
+                self.pet = try document!.data(as: Pet.self)
             } catch {
                 print("Sync error for Pet: \(error)")
             }
@@ -76,18 +96,20 @@ class PetViewModel: ObservableObject {
             }
             
             self.pets = documents.map{ (queryDocumentSnapshot) -> Pet in
-                let data = queryDocumentSnapshot.data()
+                do {
+                    let pet = try! queryDocumentSnapshot.data(as: Pet.self)
+                    return pet
+                }
                 
-                let id = data["id"] as? String ?? ""
-                let petName = data["petName"] as? String ?? ""
-                let breed = data["breed"] as? String ?? ""
-                let age = data["age"] as? String ?? ""
-                let fixed = data["fixed"] as? Bool ?? false
-                let isMale = data["isMale"] as? Bool ?? false
-                let isFemale = data["isFemale"] as? Bool ?? false
-                let bio = data["bio"] as? String ?? ""
-                
-                return Pet(id: id, petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio)
+//                let id = data["id"] as? String ?? ""
+//                let petName = data["petName"] as? String ?? ""
+//                let breed = data["breed"] as? String ?? ""
+//                let age = data["age"] as? String ?? ""
+//                let fixed = data["fixed"] as? Bool ?? false
+//                let isMale = data["isMale"] as? Bool ?? false
+//                let isFemale = data["isFemale"] as? Bool ?? false
+//                let bio = data["bio"] as? String ?? ""
+//                return Pet(id: id, petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio)
             }
         }
     }
@@ -104,7 +126,7 @@ class PetViewModel: ObservableObject {
         }
         let photoName = UUID().uuidString
         let storage = Storage.storage()
-        let storageRef = storage.reference().child("\(pet.id)/\(photoName).jpeg")
+        let storageRef = storage.reference().child("\(pet.id!)/\(photoName).jpeg")
 
 
         guard let resizedImage = image.jpegData(compressionQuality: 0.2) else {
@@ -130,12 +152,13 @@ class PetViewModel: ObservableObject {
             return false
         }
         let db = Firestore.firestore()
-        let collectionString = "Users/\(self.uuid!)/pets/\(pet.id)/photos"
+        let collectionString = "Users/\(self.uuid!)/pets/\(pet.id!)/photos"
 //        let collectionString = "Pets/\(petID)/photos"
         do {
-            var newPhoto = photo
-            newPhoto.imageURLString = imageURLString
-            try await db.collection(collectionString).document(photoName).setData(newPhoto.dictionary)
+            var newPet = pet //self.pet or Pet()
+            newPet.imageURLString = imageURLString
+            try await db.collection(collectionString).document(photoName).setData(newPet.dictionary)
+            updateImageURL(imageURLString: imageURLString)
             print("so cool")
             return true
         } catch {

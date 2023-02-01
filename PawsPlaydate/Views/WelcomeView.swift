@@ -13,7 +13,7 @@ struct WelcomeView: View {
     var body: some View {
 //        Text("Welcome \(user.user?.username ?? "")")
         TabView {
-            PetDetailView()
+            ProfileView()
                 .tabItem {
                     Image("user")
                     Text("User")
@@ -24,6 +24,7 @@ struct WelcomeView: View {
                     Text("Chat")
                 }
             ViewMyPets()
+//            ListView()
                 .tabItem {
                     Image("paw")
                     Text("Friends")

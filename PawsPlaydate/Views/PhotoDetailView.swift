@@ -68,7 +68,7 @@ struct PhotoDetailView: View {
 
                     })
                     {
-                        Text("Add Pet")
+                        Text("Save")
                     }
                 }
             }

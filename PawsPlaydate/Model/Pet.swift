@@ -19,10 +19,10 @@ struct Pet: Identifiable, Codable {
     var isMale = false
     var isFemale = false
     var bio = ""
-    var photoUserID = ""
+    var imageURLString = ""
         
 
     var dictionary: [String: Any] {
-        return ["petName": petName, "breed": breed, "age": age, "fixed": fixed, "male": isMale, "female": isFemale, "bio": bio, "photoUserID": photoUserID]
+        return ["petName": petName, "breed": breed, "age": age, "fixed": fixed, "male": isMale, "female": isFemale, "bio": bio, "imageURLString": imageURLString]
     }
 }

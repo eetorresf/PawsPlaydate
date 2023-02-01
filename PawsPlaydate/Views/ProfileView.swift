@@ -10,11 +10,21 @@ import SwiftUI
 struct ProfileView: View {
     
     @EnvironmentObject var user: UserViewModel
+    @EnvironmentObject var petVM: PetViewModel
     
     var body: some View {
-        Text("Welcome \(user.user?.username ?? "")")
-    }
-}
+        NavigationStack {
+            Text("Welcome \(user.user?.username ?? "")")
+                .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    NavigationLink("Edit", destination: PetDetailView())
+//                        .foregroundColor(Color.white)
+                    }
+                    }
+                    }
+                }
+        }
+
 
 
 

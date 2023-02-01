@@ -23,6 +23,7 @@ struct PetDetailView: View {
     @State private var bio = ""
     @State private var user = ""
     @State private var id = ""
+    @State private var imageURLString = ""
     @Environment(\.dismiss) private var dismiss
     
     @State private var image = UIImage()
@@ -86,7 +87,7 @@ struct PetDetailView: View {
                         .toolbar {
                             ToolbarItemGroup(placement: .navigationBarTrailing) {
                                 Button("Next") {
-                                    petVM.createPet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio) { uuid in
+                                    petVM.createPet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio, imageURLString: imageURLString) { uuid in
                                         DispatchQueue.main.async {
 //                                            petId = uuid
                                             isTapped.toggle()
