@@ -32,6 +32,8 @@
 		99A49C3629881FF100BEFB3F /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49C3529881FF100BEFB3F /* PhotoDetailView.swift */; };
 		99A49C38298832BC00BEFB3F /* ViewMyPets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49C37298832BC00BEFB3F /* ViewMyPets.swift */; };
 		99A49C40298AB53F00BEFB3F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49C3F298AB53F00BEFB3F /* WelcomeView.swift */; };
+		99A49C42298C0C5500BEFB3F /* ViewAllPets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49C41298C0C5500BEFB3F /* ViewAllPets.swift */; };
+		99A49C44298C289400BEFB3F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49C43298C289300BEFB3F /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		99A49C3529881FF100BEFB3F /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		99A49C37298832BC00BEFB3F /* ViewMyPets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMyPets.swift; sourceTree = "<group>"; };
 		99A49C3F298AB53F00BEFB3F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		99A49C41298C0C5500BEFB3F /* ViewAllPets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllPets.swift; sourceTree = "<group>"; };
+		99A49C43298C289300BEFB3F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,8 @@
 				99A49C3529881FF100BEFB3F /* PhotoDetailView.swift */,
 				99A49C102982D3E500BEFB3F /* ListView.swift */,
 				99A49C3F298AB53F00BEFB3F /* WelcomeView.swift */,
+				99A49C41298C0C5500BEFB3F /* ViewAllPets.swift */,
+				99A49C43298C289300BEFB3F /* CardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,8 +248,10 @@
 				99A49C0B2981D07200BEFB3F /* PetViewModel.swift in Sources */,
 				99A49C0F2982D0E300BEFB3F /* DataManager.swift in Sources */,
 				99A49C2C2984B70600BEFB3F /* User.swift in Sources */,
+				99A49C42298C0C5500BEFB3F /* ViewAllPets.swift in Sources */,
 				99A49C38298832BC00BEFB3F /* ViewMyPets.swift in Sources */,
 				99A49C40298AB53F00BEFB3F /* WelcomeView.swift in Sources */,
+				99A49C44298C289400BEFB3F /* CardView.swift in Sources */,
 				99A49C0529818A1100BEFB3F /* SelectButton.swift in Sources */,
 				99A49C0729819FEA00BEFB3F /* ImagePicker.swift in Sources */,
 				99A49C23298324D800BEFB3F /* Photo.swift in Sources */,

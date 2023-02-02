@@ -18,7 +18,7 @@ struct PhotoDetailView: View {
     @State private var showPhotoViewSheet = false
     @State private var selectedPhoto: PhotosPickerItem?
     @ObservedObject var petVM: PetViewModel
-//    @Environment(\.dismiss) var dismiss
+    @State private var isTapped = true
     
     private let auth = Auth.auth()
     var uuid: String? {
@@ -26,7 +26,8 @@ struct PhotoDetailView: View {
     }
     
     var body: some View {
-
+        if isTapped {
+            
             Form {
                 Section(header: Text("Photo")){
                     ZStack(alignment: .bottomTrailing){
@@ -37,16 +38,16 @@ struct PhotoDetailView: View {
                             if changeProfileImage {
                                 Image(uiImage: imageSelected)
                                     .resizable()
-                                    .frame(width: 120, height: 150)
+                                    .frame(width: 250, height: 300)
                             } else {
                                 Image("dog")
                                     .resizable()
-                                    .frame(width: 120, height: 120)
+                                    .frame(width: 250, height: 300)
                                     .background(Color.gray)
                             }
                         })
                         Image(systemName: "plus")
-                            .frame(width: 30, height: 30)
+                            .frame(width: 50, height: 30)
                             .foregroundColor(.purple)
                             .background(Color.white)
                             .clipShape(Circle())
@@ -55,23 +56,26 @@ struct PhotoDetailView: View {
                         ImagePicker(selectedImage: $imageSelected, sourceType: .photoLibrary)
                     }
                 }
-                                        
+                
             }
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
-                         Task {
-
-                            await petVM.saveImage(image: imageSelected)
+                        Task {
                             
+                            await petVM.saveImage(image: imageSelected)
                         }
-
+                        isTapped.toggle()
+                        
                     })
                     {
                         Text("Save")
                     }
                 }
             }
-
+        }
+        else {
+            ProfileView()
+        }
     }
 }

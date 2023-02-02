@@ -15,9 +15,10 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             Text("Welcome \(user.user?.username ?? "")")
+            ViewMyPets()
                 .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    NavigationLink("Edit", destination: PetDetailView())
+                    NavigationLink("Add A Pet", destination: PetDetailView(pet: petVM.pet))
 //                        .foregroundColor(Color.white)
                     }
                     }

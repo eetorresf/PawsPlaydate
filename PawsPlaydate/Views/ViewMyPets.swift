@@ -9,29 +9,29 @@ import SwiftUI
 import Firebase
 import FirebaseFirestoreSwift
 
+
 struct ViewMyPets: View {
-    @FirestoreQuery(collectionPath: "pets") var pets: [Pet]
-    @State private var sheetisPresented = false
-    @Environment(\.dismiss) private var dismiss
     
-    var body: some View {
-        List(pets) { pet in
-            NavigationLink {
-                PetDetailView()
-            } label: {
-                Text(pet.petName)
-                    .font(.title2)
+//    @EnvironmentObject var petVM: PetViewModel
+//    @FirestoreQuery(collectionPath: "pets") var pets: [Pet]
+    @ObservedObject var petVM = PetViewModel()
+
+        var body: some View {
+            List(petVM.pets) { pet in
+                CardView(pet: pet)
             }
-        }
-                .listStyle(.plain)
 
-        }
+            .listStyle(.plain)
+            }
+    init() {
+        petVM.fetchMyPets()
     }
+        }
     
-
-
-
-//var body: some View {
+    
+    
+    
+//    var body: some View {
 //        List(petVM.pets) { pet in
 //            VStack(alignment: .leading) {
 //                Text(pet.petName)
@@ -44,4 +44,19 @@ struct ViewMyPets: View {
 //            self.petVM.fetchPets()
 //        }
 //
+//    }
+
+//var body: some View {
+//    List(petVM.pets) { pet in
+//        NavigationLink {
+//            PetDetailView(pet: pet)
+////                    petVM.fetchAllPets()
+//        } label: {
+//            Text(pet.petName)
+//                .font(.title2)
+//        }
+//    }
+//            .listStyle(.plain)
+//
+//    }
 //}

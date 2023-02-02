@@ -23,7 +23,7 @@ struct WelcomeView: View {
                     Image("chat")
                     Text("Chat")
                 }
-            ViewMyPets()
+            ViewAllPets()
 //            ListView()
                 .tabItem {
                     Image("paw")
