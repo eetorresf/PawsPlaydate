@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ChatView: View {
+    @StateObject var messagesManager = MessagesManager()
     var messageArray = ["Hey", "how's it going", "meet at the park?", "see ya there!"]
     var body: some View {
         VStack {
             VStack {
                 TitleRow()
                 ScrollView {
-                    ForEach(messageArray, id: \.self) { text in
-                        MessageBuble(message: Message(id: "12345", text: text, received: true, timestamp: Date()))
+                    ForEach(messagesManager.messages, id: \.id) { message in
+                        MessageBuble(message: message)
                     }
                 }
                 .padding(.top, 10)
