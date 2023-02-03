@@ -1,5 +1,5 @@
 //
-//  ViewAllPets.swift
+//  ViewImages.swift
 //  PawsPlaydate
 //
 //  Created by Erika Dey on 2/2/23.
@@ -8,9 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestoreSwift
-
-
-struct ViewAllPets: View {
+struct ViewImages: View {
     
 
     @ObservedObject var petVM = PetViewModel()
@@ -24,7 +22,6 @@ struct ViewAllPets: View {
         }
     }
     init() {
-        petVM.fetchAllPets()
-//        petVM.retrieveImage()
+        petVM.retrieveImage()
     }
         }

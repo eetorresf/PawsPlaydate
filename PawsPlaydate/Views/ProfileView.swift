@@ -19,46 +19,8 @@ struct ProfileView: View {
                 .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink("Add A Pet", destination: PetDetailView(pet: petVM.pet))
-//                        .foregroundColor(Color.white)
                     }
                     }
                     }
                 }
         }
-
-
-
-
-//        VStack {
-//            NavigationStack {
-//
-//                Text("Welcome \(user.user?.username ?? "")")
-//                    .bold()
-//                    .font(.largeTitle)
-//                    .frame(width: 100, height: 100, alignment: .leading)
-//                    .toolbar {
-//                        ToolbarItemGroup(placement: .bottomBar) {
-//                            NavigationLink(destination: PetDetailView()) {
-////                                Text("Your Pets")
-//                                Image("user")
-//                            }
-//                            Button(action: {
-//                                print("chat")
-//                            }) {
-////                                Text("Sign Out")
-//                                Image("chat")
-//                            }
-//                            NavigationLink(destination: ViewMyPets()) {
-////                                Text("Friends")
-//                                Image("paw")
-//                            }
-//                            Button(action: {
-//                                user.signOut()
-//                            }) {
-////                                Text("Sign Out")
-//                                Image("exit")
-//                            }
-//                        }
-//                    }
-//            }
-//        }

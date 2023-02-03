@@ -11,7 +11,6 @@ struct WelcomeView: View {
     @EnvironmentObject var petVM: PetViewModel
     
     var body: some View {
-//        Text("Welcome \(user.user?.username ?? "")")
         TabView {
             ProfileView()
                 .tabItem {
@@ -24,7 +23,6 @@ struct WelcomeView: View {
                     Text("Chat")
                 }
             ViewAllPets()
-//            ListView()
                 .tabItem {
                     Image("paw")
                     Text("Friends")
@@ -48,11 +46,5 @@ struct signOutView: View {
                 Text("Sign Out")
    }
         }
-    }
-}
-
-struct WelcomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView()
     }
 }

@@ -27,7 +27,6 @@ class PetViewModel: ObservableObject {
         auth.currentUser?.uid
     }
 
-
     func createPet(petName: String, breed: String, age: String, fixed: Bool, isMale: Bool, isFemale: Bool, bio: String, imageURLString: String, completion: ((String) -> Void)? = nil) {
         pet = Pet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio, imageURLString: imageURLString, ownerID: uuid!)
             self.addPet(pet, completion: completion)
@@ -82,20 +81,20 @@ class PetViewModel: ObservableObject {
 
     func fetchAllPets() {
 
-//        let documentid = Auth.auth().currentUser?.uid
-        db.collectionGroup("Users").whereField("ownerID", isNotEqualTo: self.uuid!).getDocuments { snapshot, err in
+        db.collectionGroup("pets").whereField("ownerID", isNotEqualTo: self.uuid!).getDocuments { snapshot, err in
                 if  err == nil {
                     if let snapshot = snapshot {
                         DispatchQueue.main.async {
                             
                             self.pets = snapshot.documents.map { pet in
-                                return Pet(id: pet.documentID, petName: pet["petName"] as? String ?? "", breed: pet["breed"] as? String ?? "", age: pet["age"] as? String ?? "", fixed: pet["fixed"] as? Bool ?? false, isMale: pet["isMale"] as? Bool ?? false, isFemale: pet["isFemale"] as? Bool ?? false, bio: pet["bio"] as? String ?? "", imageURLString: pet["imageURLString"] as? String ?? "", ownerID: pet["ownerID"] as? String ?? "")
+                                return try! pet.data(as: Pet.self)
+                                
                             }
                         }
                     }
                 }
                 else {
-                    print("Unable to fetch all pets.")
+                    print("Unable to fetch all pets.\(err!.localizedDescription)")
                 }
             }
         
@@ -109,7 +108,7 @@ class PetViewModel: ObservableObject {
                     DispatchQueue.main.async {
                             
                         self.pets = snapshot.documents.map { pet in
-                            return Pet(id: pet.documentID, petName: pet["petName"] as? String ?? "", breed: pet["breed"] as? String ?? "", age: pet["age"] as? String ?? "", fixed: pet["fixed"] as? Bool ?? false, isMale: pet["isMale"] as? Bool ?? false, isFemale: pet["isFemale"] as? Bool ?? false, bio: pet["bio"] as? String ?? "", imageURLString: pet["imageURLString"] as? String ?? "", ownerID: pet["ownerID"] as? String ?? "")
+                            return try! pet.data(as: Pet.self)
                     }
                     }
                 }
@@ -169,42 +168,44 @@ class PetViewModel: ObservableObject {
         }
     }
     
-//    func retrieveImage() {
-//         //Get data from db
-//        let db = Firestore.firestore()
-//
-//        db.collection("photos").getDocuments { snapshot, error in
-//            if error == nil && snapshot != nil {
-//                var paths = [String]()
-//                //loop through all returned docs
-//                for doc in snapshot!.documents {
-//                    //extract file path
-//                    paths.append(doc["imageURL"] as! String)
-//                }
-//                //loop through each file and fetch data from storage
-//                for path in paths {
-//                    //Get a reference to storage
-//                    let storageRef = Storage.storage().reference()
-//                    let fileRef = storageRef.child(path)
-//                    //specify the path
-//                    fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-//                        if error == nil && data != nil {
-//                            if let image = UIImage(data: data!) {
-//
-//                                DispatchQueue.main.async {
-//
-//                                    retrievedImages.append(image)
-//                                }
-//                            }
-//                        }
-//                    }
-//                    //retrive the data
-//                }
-//            }
-//        }
-//        //Get data from storage for image reference
-//
-//        //Display images
-//    }
+    func retrieveImage() {
+         //Get data from db
+        let db = Firestore.firestore()
+
+        db.collection("photos").getDocuments { snapshot, error in
+            if error == nil && snapshot != nil {
+                var paths = [String]()
+                //loop through all returned docs
+                for doc in snapshot!.documents {
+                    //extract file path
+                    paths.append(doc["imageURL"] as! String)
+                }
+                //loop through each file and fetch data from storage
+                for path in paths {
+                    //Get a reference to storage
+                    let storageRef = Storage.storage().reference()
+                    let fileRef = storageRef.child(path)
+                    //specify the path
+                    fileRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                        if error == nil && data != nil {
+                            if let image = UIImage(data: data!) {
+
+                                DispatchQueue.main.async {
+
+                                    self.retrievedImages.append(image)
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+    
+    
+    
+    
+    
 }
 

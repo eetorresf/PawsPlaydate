@@ -12,8 +12,7 @@ import FirebaseFirestoreSwift
 
 struct ViewMyPets: View {
     
-//    @EnvironmentObject var petVM: PetViewModel
-//    @FirestoreQuery(collectionPath: "pets") var pets: [Pet]
+
     @ObservedObject var petVM = PetViewModel()
 
         var body: some View {
@@ -29,34 +28,3 @@ struct ViewMyPets: View {
         }
     
     
-    
-    
-//    var body: some View {
-//        List(petVM.pets) { pet in
-//            VStack(alignment: .leading) {
-//                Text(pet.petName)
-//                    .font(.headline)
-//                Text(pet.breed)
-//            }
-//        }
-//        .navigationBarTitle("Pets")
-//        .onAppear() {
-//            self.petVM.fetchPets()
-//        }
-//
-//    }
-
-//var body: some View {
-//    List(petVM.pets) { pet in
-//        NavigationLink {
-//            PetDetailView(pet: pet)
-////                    petVM.fetchAllPets()
-//        } label: {
-//            Text(pet.petName)
-//                .font(.title2)
-//        }
-//    }
-//            .listStyle(.plain)
-//
-//    }
-//}

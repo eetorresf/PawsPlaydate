@@ -8,15 +8,23 @@
 import SwiftUI
 
 struct CardView: View {
+    
     let pet: Pet
+    
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(pet.petName)
                 .font(.headline)
-            Divider()
-            VStack {
-                
+            AsyncImage(url: URL(string: pet.imageURLString)) { image in
+                image
+                    .resizable()      // Error here
+                    .frame(width: 300, height: 300)
+            } placeholder: {
+                //put your placeholder here
             }
+//            Divider()
+            Spacer()
             VStack{
                 Text(pet.breed)
                 Text("Age: ")
@@ -31,14 +39,8 @@ struct CardView: View {
             .font(.caption)
         }
         .padding()
-//        .foregroundColor(Color.gray)
-        .frame(alignment: .leading)
+//        .background(Color.gray)
+//        .frame(alignment: .leading)
 
     }
 }
-
-//struct CardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CardView()
-//    }
-//}
