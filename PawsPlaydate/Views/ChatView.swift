@@ -25,6 +25,7 @@ struct ChatView: View {
             }
             .background(Color("Purple"))
             MessageField()
+                .environmentObject(messagesManager)
         }
     }
 }
@@ -83,6 +84,7 @@ struct MessageBuble: View {
 
 
 struct MessageField: View {
+    @EnvironmentObject var messagesManager: MessagesManager
     @State private var message = ""
     
     var body: some View {
@@ -90,7 +92,7 @@ struct MessageField: View {
             CustomTextField(placeholder: Text("Enter your message here"), text: $message)
             
             Button {
-                print("Message Sent!")
+                messagesManager.sendMessage(text: message)
                 message = ""
             } label: {
                 Image(systemName: "paperplane.fill")
