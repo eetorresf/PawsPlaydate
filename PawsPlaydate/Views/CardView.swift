@@ -72,6 +72,7 @@ struct HeartButton: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 25)
                 .foregroundColor(isLiked ? .red : .gray)
+//                .padding()
         })
         .scaleEffect(animate ? animationScale : 1)
         .animation(Animation.easeIn(duration: animationDuration), value: animate)

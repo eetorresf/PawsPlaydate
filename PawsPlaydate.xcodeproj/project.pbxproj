@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99355A40298D6EDE00D72238 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A3F298D6EDE00D72238 /* ChatView.swift */; };
+		99355A42298D70FA00D72238 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A41298D70FA00D72238 /* Message.swift */; };
+		99355A44298D7F4300D72238 /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A43298D7F4300D72238 /* MessagesManager.swift */; };
 		99A49BEE298061DB00BEFB3F /* PawsPlaydateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49BED298061DB00BEFB3F /* PawsPlaydateApp.swift */; };
 		99A49BF0298061DB00BEFB3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49BEF298061DB00BEFB3F /* ContentView.swift */; };
 		99A49BF2298061DC00BEFB3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99A49BF1298061DC00BEFB3F /* Assets.xcassets */; };
@@ -37,6 +40,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		99355A3F298D6EDE00D72238 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		99355A41298D70FA00D72238 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		99355A43298D7F4300D72238 /* MessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManager.swift; sourceTree = "<group>"; };
 		99A49BEA298061DB00BEFB3F /* PawsPlaydate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PawsPlaydate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99A49BED298061DB00BEFB3F /* PawsPlaydateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawsPlaydateApp.swift; sourceTree = "<group>"; };
 		99A49BEF298061DB00BEFB3F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,6 +115,7 @@
 				99A49BF3298061DC00BEFB3F /* Preview Content */,
 				99A49C0629819FEA00BEFB3F /* ImagePicker.swift */,
 				99A49C0E2982D0E300BEFB3F /* DataManager.swift */,
+				99355A43298D7F4300D72238 /* MessagesManager.swift */,
 			);
 			path = PawsPlaydate;
 			sourceTree = "<group>";
@@ -134,6 +141,7 @@
 				99A49C1A2982E36F00BEFB3F /* Pet.swift */,
 				99A49C22298324D800BEFB3F /* Photo.swift */,
 				99A49C2B2984B70600BEFB3F /* User.swift */,
+				99355A41298D70FA00D72238 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -159,6 +167,7 @@
 				99A49C41298C0C5500BEFB3F /* ViewAllPets.swift */,
 				99A49C43298C289300BEFB3F /* CardView.swift */,
 				99A49C45298C626600BEFB3F /* ViewImages.swift */,
+				99355A3F298D6EDE00D72238 /* ChatView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,8 +256,10 @@
 				99A49C0B2981D07200BEFB3F /* PetViewModel.swift in Sources */,
 				99A49C0F2982D0E300BEFB3F /* DataManager.swift in Sources */,
 				99A49C2C2984B70600BEFB3F /* User.swift in Sources */,
+				99355A40298D6EDE00D72238 /* ChatView.swift in Sources */,
 				99A49C42298C0C5500BEFB3F /* ViewAllPets.swift in Sources */,
 				99A49C38298832BC00BEFB3F /* ViewMyPets.swift in Sources */,
+				99355A42298D70FA00D72238 /* Message.swift in Sources */,
 				99A49C40298AB53F00BEFB3F /* WelcomeView.swift in Sources */,
 				99A49C44298C289400BEFB3F /* CardView.swift in Sources */,
 				99A49C0529818A1100BEFB3F /* SelectButton.swift in Sources */,
@@ -261,6 +272,7 @@
 				99A49C1D2982E4D200BEFB3F /* PetDetailView.swift in Sources */,
 				99A49C2E2984B77600BEFB3F /* UserViewModel.swift in Sources */,
 				99A49C46298C626600BEFB3F /* ViewImages.swift in Sources */,
+				99355A44298D7F4300D72238 /* MessagesManager.swift in Sources */,
 				99A49BEE298061DB00BEFB3F /* PawsPlaydateApp.swift in Sources */,
 				99A49C1B2982E36F00BEFB3F /* Pet.swift in Sources */,
 			);

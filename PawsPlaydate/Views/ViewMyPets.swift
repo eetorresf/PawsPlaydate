@@ -17,7 +17,7 @@ struct ViewMyPets: View {
 
         var body: some View {
             List(petVM.pets) { pet in
-                CardView(pet: pet)
+                myCardView(pet: pet)
             }
 
             .listStyle(.plain)
@@ -28,3 +28,42 @@ struct ViewMyPets: View {
         }
     
     
+struct myCardView: View {
+    
+    let pet: Pet
+    @State private var isLiked = false
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+                
+                Text(pet.petName)
+                    .font(.headline)
+                AsyncImage(url: URL(string: pet.imageURLString)) { image in
+                    image
+                        .resizable()      // Error here
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 300, height: 300)
+                } placeholder: {
+                    //put your placeholder here
+                }
+                Spacer()
+
+                VStack{
+                    Text(pet.breed)
+                    Text("Age: ")
+                    + Text(pet.age)
+                    Text("")
+                    + Text(pet.isFemale ? "Female" : "")
+                    + Text(pet.isMale ? "Male" : "")
+                    Text("Spayed/Neutered: ")
+                    + Text(pet.fixed ? "Yes" : "No")
+                    Text(pet.bio)
+                }
+                .font(.caption)
+                Spacer()
+
+        }
+        .padding()
+
+    }
+}
