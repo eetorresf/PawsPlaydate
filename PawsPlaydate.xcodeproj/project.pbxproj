@@ -11,6 +11,7 @@
 		99355A42298D70FA00D72238 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A41298D70FA00D72238 /* Message.swift */; };
 		99355A44298D7F4300D72238 /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A43298D7F4300D72238 /* MessagesManager.swift */; };
 		99355A462991857A00D72238 /* DisplayMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A452991857A00D72238 /* DisplayMessagesView.swift */; };
+		99355A48299195A600D72238 /* DisplayMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A47299195A600D72238 /* DisplayMessagesViewModel.swift */; };
 		99A49BEE298061DB00BEFB3F /* PawsPlaydateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49BED298061DB00BEFB3F /* PawsPlaydateApp.swift */; };
 		99A49BF0298061DB00BEFB3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49BEF298061DB00BEFB3F /* ContentView.swift */; };
 		99A49BF2298061DC00BEFB3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99A49BF1298061DC00BEFB3F /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		99355A41298D70FA00D72238 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		99355A43298D7F4300D72238 /* MessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManager.swift; sourceTree = "<group>"; };
 		99355A452991857A00D72238 /* DisplayMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessagesView.swift; sourceTree = "<group>"; };
+		99355A47299195A600D72238 /* DisplayMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessagesViewModel.swift; sourceTree = "<group>"; };
 		99A49BEA298061DB00BEFB3F /* PawsPlaydate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PawsPlaydate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99A49BED298061DB00BEFB3F /* PawsPlaydateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawsPlaydateApp.swift; sourceTree = "<group>"; };
 		99A49BEF298061DB00BEFB3F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			children = (
 				99A49C0A2981D07100BEFB3F /* PetViewModel.swift */,
 				99A49C2D2984B77600BEFB3F /* UserViewModel.swift */,
+				99355A47299195A600D72238 /* DisplayMessagesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				99A49C44298C289400BEFB3F /* CardView.swift in Sources */,
 				99A49C0529818A1100BEFB3F /* SelectButton.swift in Sources */,
 				99A49C0729819FEA00BEFB3F /* ImagePicker.swift in Sources */,
+				99355A48299195A600D72238 /* DisplayMessagesViewModel.swift in Sources */,
 				99A49C23298324D800BEFB3F /* Photo.swift in Sources */,
 				99355A462991857A00D72238 /* DisplayMessagesView.swift in Sources */,
 				99A49C3629881FF100BEFB3F /* PhotoDetailView.swift in Sources */,

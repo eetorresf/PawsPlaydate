@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct DisplayMessagesView: View {
+    
+    @ObservedObject var messagesVM = DisplayMessagesViewModel()
+    
     var body: some View {
         NavigationView {
             
@@ -31,6 +34,7 @@ struct DisplayMessagesView: View {
                 .padding()
                 
                 ScrollView {
+                    Text("TEST")
                     ForEach(0..<10, id: \.self) { num in
                         VStack {
                             HStack(spacing: 16) {
@@ -93,14 +97,14 @@ struct DisplayMessagesView: View {
 
 
 struct createNewMessageView: View {
-    
+    @ObservedObject var messagesVM = DisplayMessagesViewModel()
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(0..<10) { num in
-                    Text("New User")
+                ForEach(messagesVM.users) { user in
+                    Text(user.username)
                 }
             }.navigationTitle("New Message")
                 .toolbar {
