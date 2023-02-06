@@ -48,7 +48,7 @@ struct myCardView: View {
                 }
                 Spacer()
 
-                VStack{
+                VStack(alignment: .leading){
                     Text(pet.breed)
                     Text("Age: ")
                     + Text(pet.age)

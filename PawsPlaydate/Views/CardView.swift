@@ -28,7 +28,7 @@ struct CardView: View {
                 //            Divider()
                 Spacer()
             HStack {
-                VStack{
+                VStack(alignment: .leading){
                     Text(pet.breed)
                     Text("Age: ")
                     + Text(pet.age)
