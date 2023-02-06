@@ -32,7 +32,9 @@ struct WelcomeView: View {
                     Image("exit")
                     Text("Sign Out")
                 }
+                .foregroundColor(Color.blue)
         }
+        
     }
 }
 

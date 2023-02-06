@@ -18,7 +18,9 @@ struct PhotoDetailView: View {
     @State private var showPhotoViewSheet = false
     @State private var selectedPhoto: PhotosPickerItem?
     @ObservedObject var petVM: PetViewModel
-    @State private var isTapped = true
+    
+
+    @State private var readyToNavigate : Bool = false
     
     private let auth = Auth.auth()
     var uuid: String? {
@@ -26,7 +28,6 @@ struct PhotoDetailView: View {
     }
     
     var body: some View {
-        if isTapped {
             
             Form {
                 Section(header: Text("Photo")){
@@ -60,22 +61,28 @@ struct PhotoDetailView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        Task {
-                            
-                            await petVM.saveImage(image: imageSelected)
+                    NavigationStack {
+                        VStack {
+                            Button {
+                                //code
+                                Task {
+                                                            
+                                await petVM.saveImage(image: imageSelected)
+                            }
+                                readyToNavigate = true
+                            } label: {
+                                Text("Save")
+                            }
                         }
-                        isTapped.toggle()
-                        
-                    })
-                    {
-                        Text("Save")
+                        .navigationTitle("Save")
+                        .navigationDestination(isPresented: $readyToNavigate) {
+                            ProfileView()
+                        }
                     }
                 }
+                
             }
         }
-        else {
-            ProfileView()
-        }
+
     }
-}
+
