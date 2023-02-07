@@ -12,6 +12,7 @@
 		99355A44298D7F4300D72238 /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A43298D7F4300D72238 /* MessagesManager.swift */; };
 		99355A462991857A00D72238 /* DisplayMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A452991857A00D72238 /* DisplayMessagesView.swift */; };
 		99355A48299195A600D72238 /* DisplayMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A47299195A600D72238 /* DisplayMessagesViewModel.swift */; };
+		99355A4A2992EF7D00D72238 /* MyLikedPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A492992EF7D00D72238 /* MyLikedPetsView.swift */; };
 		99A49BEE298061DB00BEFB3F /* PawsPlaydateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49BED298061DB00BEFB3F /* PawsPlaydateApp.swift */; };
 		99A49BF0298061DB00BEFB3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49BEF298061DB00BEFB3F /* ContentView.swift */; };
 		99A49BF2298061DC00BEFB3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99A49BF1298061DC00BEFB3F /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		99355A43298D7F4300D72238 /* MessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManager.swift; sourceTree = "<group>"; };
 		99355A452991857A00D72238 /* DisplayMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessagesView.swift; sourceTree = "<group>"; };
 		99355A47299195A600D72238 /* DisplayMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessagesViewModel.swift; sourceTree = "<group>"; };
+		99355A492992EF7D00D72238 /* MyLikedPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLikedPetsView.swift; sourceTree = "<group>"; };
 		99A49BEA298061DB00BEFB3F /* PawsPlaydate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PawsPlaydate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99A49BED298061DB00BEFB3F /* PawsPlaydateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawsPlaydateApp.swift; sourceTree = "<group>"; };
 		99A49BEF298061DB00BEFB3F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				99A49C45298C626600BEFB3F /* ViewImages.swift */,
 				99355A3F298D6EDE00D72238 /* ChatView.swift */,
 				99355A452991857A00D72238 /* DisplayMessagesView.swift */,
+				99355A492992EF7D00D72238 /* MyLikedPetsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				99355A48299195A600D72238 /* DisplayMessagesViewModel.swift in Sources */,
 				99A49C23298324D800BEFB3F /* Photo.swift in Sources */,
 				99355A462991857A00D72238 /* DisplayMessagesView.swift in Sources */,
+				99355A4A2992EF7D00D72238 /* MyLikedPetsView.swift in Sources */,
 				99A49C3629881FF100BEFB3F /* PhotoDetailView.swift in Sources */,
 				99A49C312984BFB900BEFB3F /* ProfileView.swift in Sources */,
 				99A49C332984C1D900BEFB3F /* AuthenticationView.swift in Sources */,
