@@ -85,7 +85,7 @@ struct SignUpView: View {
     @State private var password = ""
     @State private var username = ""
     @State private var id = ""
-    @State private var pets = [""]
+    @State private var likedPets = [""]
     
     var body: some View {
         VStack {
@@ -126,7 +126,7 @@ struct SignUpView: View {
             }
             .padding([.leading, .trailing], 25)
             Button(action: {
-                user.signUp(email: email, password: password, username: username)
+                user.signUp(email: email, password: password, username: username, likedPets: likedPets)
             }) {
                 Text("Sign Up")
             }.background(Color.black)

@@ -68,6 +68,7 @@ class PetViewModel: ObservableObject {
             }
         }
     }
+    
     private func syncPet() {
         db.collection("Users").document(self.uuid!).getDocument { (document, error) in
             guard document != nil, error == nil else {return}
@@ -202,9 +203,6 @@ class PetViewModel: ObservableObject {
             }
         }
     }
-    
-    
-    
     
     
 }

@@ -17,7 +17,8 @@ struct WelcomeView: View {
                     Image("user")
                     Text("User")
                 }
-            ChatView()
+//            ChatView()
+            DisplayMessagesView()
                 .tabItem {
                     Image("chat")
                     Text("Chat")
