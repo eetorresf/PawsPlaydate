@@ -102,4 +102,19 @@ class UserViewModel: ObservableObject {
             }
         }
     }
+    
+    func removeLikedPets(petId: String) {
+        let dataRef = db.collection("Users").document(self.uuid!)
+        
+        
+        dataRef.updateData([
+            "likedPets": FieldValue.arrayRemove([petId])
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
 }

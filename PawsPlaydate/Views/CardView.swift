@@ -91,14 +91,22 @@ struct HeartButton: View {
         isLiked ? 0.7 : 1.3
     }
     @State private var animate = false
+    @State private var add = false
 
     var body: some View {
         Button(action: {
             self.animate = true
+            self.add.toggle()
             DispatchQueue.main.asyncAfter(deadline: .now() + self.animationDuration, execute: {
+                if self.add == true {
+                    userVM.updateLikedPets(petId: petId)
+                } else {
+                    
+                    userVM.removeLikedPets(petId: petId)
+                }
                 self.animate = false
                 self.isLiked.toggle()
-                userVM.updateLikedPets(petId: petId)
+                
                 
             })
         }, label: {
