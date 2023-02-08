@@ -118,19 +118,4 @@ class UserViewModel: ObservableObject {
         }
     }
     
-//    func fetchLikedPets() {
-//        db.collection("Users").document(self.uuid!).getDocument { snapshot, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//            
-//            if let doc = snapshot {
-//                let pets = doc.get("likedPets") as! [String]
-//                for pet in pets {
-//                    print(pet)
-//                }
-//            }
-//        }
-//    }
 }

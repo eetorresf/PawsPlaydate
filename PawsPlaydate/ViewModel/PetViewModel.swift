@@ -205,20 +205,128 @@ class PetViewModel: ObservableObject {
     }
     
     func fetchLikedPets() {
-        db.collection("Users").document(self.uuid!).getDocument { snapshot, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
+        db.collection("Users").document(self.uuid!).collection("likedPets").getDocuments { snapshot, err in
+            if  err == nil {
+                if let snapshot = snapshot {
+                    DispatchQueue.main.async {
+                            
+                        self.pets = snapshot.documents.map { pet in
+                            return try! pet.data(as: Pet.self)
+                    }
+                    }
+                }
             }
-            
-            if let doc = snapshot {
-                let pets = doc.get("likedPets") as! [String]
-                for pet in pets {
-                    print(pet)
+            else {
+                //
+            }
+        }
+        
+    }
+    
+//    func addLikedPet(pet: Pet) async -> Bool {
+//        guard pet.id != nil else {
+//            print("error pet.id = nil")
+//            return false
+//        }
+//        let collectionString = "Users/\(self.uuid!)/likedPets"
+//
+//        if let id = pet.id {
+//            do {
+//                try await db.collection(collectionString).document(id).setData(from: pet)
+//                print("pet liked successfully")
+//                return true
+//            } catch {
+//                print("error. could not add pet to likedPets")
+//                return false
+//            }
+//        }
+//        return false
+//    }
+    func addLikedPet(pet: Pet) {
+        guard let petId = pet.id else {
+            print("error pet.id is not here!")
+            return
+        }
+        let dataRef = db.collection("Users").document(self.uuid!).collection("likedPets").document(petId)
+        
+        do {
+            try? dataRef.setData(from: pet) { err in
+
+                if err != nil {
+                    print("error! \(err!.localizedDescription)")
                 }
             }
         }
     }
+
+    func removeLikedPet(pet: Pet) async -> Bool {
+        guard let petId = pet.id else {
+            print("Error")
+            return false
+        }
+        do {
+            try await db.collection("Users").document(self.uuid!).collection("likedPets").document(petId).delete()
+            print("pet removed from likedPets")
+            return true
+        } catch {
+            print("Error! \(error.localizedDescription)")
+            return false
+        }
+//        let dataRef = db.collection("Users").document(self.uuid!).collection("likedPets").document(pet.id!).delete { error in
+//            if error == nil {
+//                //No errors
+//
+//                DispatchQueue.main.async {
+//
+//                    self.pets.removeAll { pet in
+//                        return pet.id == pet.id
+//                    }
+//                }
+//            }
+//        }
+        
+    }
     
+///end
 }
 
+
+
+
+
+
+//func fetchLikedPets() {
+//    db.collection("Users").document(self.uuid!).getDocument { snapshot, error in
+//        if let error = error {
+//            print(error.localizedDescription)
+//            return
+//        }
+//
+//        if let doc = snapshot {
+//            let pets = doc.get("likedPets") as! [String]
+//            for pet in pets {
+//                print(pet)
+//            }
+//        }
+//    }
+//}
+
+//
+//func addLikedPet(pet: Pet) {
+//    let dataRef = db.collection("Users").document(self.uuid!).collection("likedPets").document()
+//    do {
+//        try? dataRef.setData(from: pet) { err in
+//
+//            if err != nil {
+//                print("Loser :( ")
+//            }
+//            dataRef.getDocument { documentSnapshot, error in
+//                do {
+//
+//                    self.pet = try! documentSnapshot!.data(as: Pet.self)
+//                }
+//
+//            }
+//        }
+//    }
+//}

@@ -28,7 +28,8 @@ struct WelcomeView: View {
                     Image("paw")
                     Text("Friends")
                 }
-            signOutView()
+//            signOutView()
+            MyLikedPetsView()
                 .tabItem {
                     Image("exit")
                     Text("Sign Out")

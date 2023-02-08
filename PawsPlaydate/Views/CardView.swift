@@ -41,7 +41,7 @@ struct CardView: View {
                 }
                 .font(.caption)
                 Spacer()
-                HeartButton(isLiked: $isLiked, petId: pet.id!)
+                HeartButton(isLiked: $isLiked, pet: pet)
                     .padding(.trailing, 20)
             }
         }
@@ -50,41 +50,15 @@ struct CardView: View {
     }
 }
 
-//struct HeartButton: View {
-//    @Binding var isLiked: Bool
-//
-//    private let animationDuration: Double = 0.1
-//    private var animationScale: CGFloat {
-//        isLiked ? 0.7 : 1.3
-//    }
-//    @State private var animate = false
-//
-//    var body: some View {
-//        Button(action: {
-//            self.animate = true
-//            DispatchQueue.main.asyncAfter(deadline: .now() + self.animationDuration, execute: {
-//                self.animate = false
-//                self.isLiked.toggle()
-//            })
-//        }, label: {
-//            Image(systemName: isLiked ? "heart.fill" : "heart")
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: 25)
-//                .foregroundColor(isLiked ? .red : .gray)
-////                .padding()
-//        })
-//        .scaleEffect(animate ? animationScale : 1)
-//        .animation(Animation.easeIn(duration: animationDuration), value: animate)
-//    }
-//}
 
 struct HeartButton: View {
     //pet.id current user id
     
     @Binding var isLiked: Bool
-    @State var petId: String
-    @EnvironmentObject var userVM: UserViewModel
+//    @State var petId: String
+//    @EnvironmentObject var userVM: UserViewModel
+    @State var pet: Pet
+    @EnvironmentObject var petVM: PetViewModel
 
     private let animationDuration: Double = 0.1
     private var animationScale: CGFloat {
@@ -99,10 +73,15 @@ struct HeartButton: View {
             self.add.toggle()
             DispatchQueue.main.asyncAfter(deadline: .now() + self.animationDuration, execute: {
                 if self.add == true {
-                    userVM.updateLikedPets(petId: petId)
-                } else {
+//                    userVM.updateLikedPets(petId: petId)
+                    petVM.addLikedPet(pet: pet)
                     
-                    userVM.removeLikedPets(petId: petId)
+                    
+                } else {
+                    Task {
+                        
+                        _ = await petVM.removeLikedPet(pet: pet)
+                    }
                 }
                 self.animate = false
                 self.isLiked.toggle()

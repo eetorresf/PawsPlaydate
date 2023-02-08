@@ -10,12 +10,13 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct MyLikedPetsView: View {
+    
     @ObservedObject var petVM = PetViewModel()
     
     var body: some View {
         List(petVM.pets) { pet in
             
-            CardView(pet: pet)
+            myCardView(pet: pet)
                 .listStyle(.plain)
         }
     }
