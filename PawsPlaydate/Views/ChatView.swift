@@ -39,7 +39,7 @@ struct ChatView: View {
 
 
 struct TitleRow: View {
-    var name = ""
+    var name = "Erika"
     var body: some View {
         HStack(spacing: 20) {
             Image("person")

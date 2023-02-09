@@ -26,15 +26,15 @@ struct WelcomeView: View {
             ViewAllPets()
                 .tabItem {
                     Image("paw")
-                    Text("Friends")
+                    Text("Pets")
                 }
 //            signOutView()
             MyLikedPetsView()
                 .tabItem {
-                    Image("exit")
-                    Text("Sign Out")
+                    Image("heart")
+                    Text("Friends")
                 }
-                .foregroundColor(Color.blue)
+//                .foregroundColor(Color.blue)
         }
         
     }

@@ -9,10 +9,8 @@ import SwiftUI
 
 struct AuthenticationView: View {
     var body: some View {
-        VStack {
             SignInView()
-//            NavigationLink("Sign Up!", destination: SignUpView())
-        }
+
     }
 }
 
@@ -24,19 +22,15 @@ struct SignInView: View {
     var body: some View {
         VStack {
             Text("Paws Playdate")
-                .font(.largeTitle).foregroundColor(Color.white)
+                .font(.largeTitle).bold().foregroundColor(Color.white)
                 .padding([.top, .bottom], 40)
                 .shadow(color: .black, radius: 4, x: 0, y: 4)
             Image("dog")
                 .resizable()
-                .frame(width: 250, height: 250)
+                .frame(width: 300, height: 300)
                 .padding(.bottom, 50)
-//                .shadow(color: .black, radius: 5, x: 0, y: 5)
             Spacer()
-//                .frame(height: 75)
             VStack(alignment: .leading, spacing: 15) {
-//                Spacer()
-//                    .frame(height: 75)
                 TextField("Email", text: $email)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
@@ -48,6 +42,7 @@ struct SignInView: View {
                     .padding()
                     .background(Color.white)
             }
+            
             .padding([.leading, .trailing], 25)
                 Button(action: {
                     guard !email.isEmpty, !password.isEmpty else {
@@ -57,15 +52,11 @@ struct SignInView: View {
                 }) {
                     Text("Sign In")
                         .font(.headline)
-//                        .foregroundColor(Color.white)
-//                        .frame(width: 200, height: 50)
-//                        .cornerRadius(8)
                         .padding()
                 }.background(Color.black)
                 .foregroundColor(Color.white)
                 .cornerRadius(10)
-//                .padding()
-//            Spacer()
+                .padding([.top, .bottom], 20)
 
             NavigationLink("Sign Up!", destination: SignUpView())
                 .foregroundColor(Color.white)
@@ -89,25 +80,18 @@ struct SignUpView: View {
     
     var body: some View {
         VStack {
-            
-            
-//            Text("Welcome to Paws Playdate")
-//                .font(.title)
-//                .foregroundColor(Color.white)
+
             Text("Create an Account")
                 .font(.title)
                 .foregroundColor(Color.white)
                 .padding([.top, .bottom], 40)
-//            Spacer()
             Image("dog")
                 .resizable()
                 .frame(width: 250, height: 250)
                 .padding(.bottom, 50)
             Spacer()
-//                .frame(height: 75)
             VStack(alignment: .leading, spacing: 15) {
-//                Spacer()
-//                    .frame(height: 75)
+
                 TextField("Username", text: $username)
                     .disableAutocorrection(true)
                     .padding()
@@ -122,17 +106,18 @@ struct SignUpView: View {
                     .disableAutocorrection(true)
                     .padding()
                     .background(Color.white)
-//                Spacer()
             }
             .padding([.leading, .trailing], 25)
             Button(action: {
-                user.signUp(email: email, password: password, username: username, likedPets: likedPets)
+                user.signUp(email: email, password: password, username: username)
             }) {
                 Text("Sign Up")
+                    .font(.headline)
+                    .padding()
             }.background(Color.black)
                 .foregroundColor(Color.white)
                 .cornerRadius(10)
-//                .padding()
+                .padding([.top, .bottom], 20)
         }
         
         .background(

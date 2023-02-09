@@ -31,7 +31,6 @@ struct ViewMyPets: View {
 struct myCardView: View {
     
     let pet: Pet
-    @State private var isLiked = false
     
     var body: some View {
         VStack(alignment: .leading) {

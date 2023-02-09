@@ -16,43 +16,21 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             Text("Welcome \(user.user?.username ?? "")")
+                .font(.system(size: 24, weight: .bold))
             ViewMyPets()
                 .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink("Add A Pet", destination: PetDetailView(pet: petVM.pet))
                         .foregroundColor(Color.blue)
                     }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Sign Out") {
+                            user.signOut()
+                        }
+                        .foregroundColor(.blue)
+                    }
                     }
                     }
                 }
 }
 
-//var body: some View {
-//    NavigationStack {
-//        Text("Welcome \(user.user?.username ?? "")")
-//        ViewMyPets()
-//            .toolbar {
-//            ToolbarItemGroup(placement: .navigationBarTrailing) {
-//                NavigationLink("Add A Pet", destination: PetDetailView(pet: petVM.pet))
-//                    .foregroundColor(Color.blue)
-//                }
-//                }
-//                }
-//            }
-//    }
-//var body: some View {
-//    NavigationStack {
-//        Text("Welcome \(user.user?.username ?? "")")
-//        ViewMyPets()
-//            .toolbar {
-//                ToolbarItemGroup(placement: .navigationBarTrailing) {
-//                    Button("Add A Pet") {
-//                        showSheet.toggle()
-//                    }
-//                    .sheet(isPresented: $showSheet) {
-//                        PetDetailView(pet: petVM.pet)
-//                    }
-//                }
-//            }
-//    }
-//}

@@ -10,14 +10,14 @@ import SwiftUI
 struct DisplayMessagesView: View {
     
     @ObservedObject var messagesVM = DisplayMessagesViewModel()
+    @EnvironmentObject var user: UserViewModel
     
     var body: some View {
         NavigationView {
-            
             VStack {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Username")
+                        Text("\(user.user?.username ?? "")")
                             .font(.system(size: 24, weight: .bold))
                         HStack {
                             Circle()
@@ -34,26 +34,32 @@ struct DisplayMessagesView: View {
                 .padding()
                 
                 ScrollView {
-                    Text("TEST")
-                    ForEach(0..<10, id: \.self) { num in
+//                    Text("TEST")
+                    ForEach(0..<5, id: \.self) { num in
                         VStack {
-                            HStack(spacing: 16) {
-                                Image(systemName: "person.fill")
-                                    .font(.system(size: 32))
-                                    .padding(8)
-                                    .overlay(RoundedRectangle(cornerRadius: 44)
-                                        .stroke(Color(.label), lineWidth: 1))
-                                Text("Message row")
-                                VStack(alignment: .leading) {
-                                    Text("Username")
-                                        .font(.system(size: 16, weight: .bold))
-                                    Text("Message sent to user")
-                                        .font(.system(size: 14))
-                                        .foregroundColor(Color(.lightGray))
-                                }
+                            NavigationLink {
+                                ChatView()
+                            } label: {
                                 
-                                Text("11d")
-                                    .font(.system(size: 14, weight: .semibold))
+                                HStack(spacing: 16) {
+                                    Image(systemName: "person.fill")
+                                        .font(.system(size: 32))
+                                        .padding(8)
+                                        .overlay(RoundedRectangle(cornerRadius: 44)
+                                            .stroke(Color(.label), lineWidth: 1))
+                                    //                                Text("Message row")
+                                    VStack(alignment: .leading) {
+                                        Text("Username")
+                                            .font(.system(size: 16, weight: .bold))
+                                        Text("Message sent to user")
+                                            .font(.system(size: 14))
+                                            .foregroundColor(Color(.lightGray))
+                                    }
+                                    
+                                    Text("11d")
+                                        .font(.system(size: 14, weight: .semibold))
+                                }
+                                .foregroundColor(.black)
                             }
                             Divider()
                                 .padding(.vertical, 8)
@@ -104,7 +110,22 @@ struct createNewMessageView: View {
         NavigationView {
             ScrollView {
                 ForEach(messagesVM.users) { user in
-                    Text(user.username)
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        HStack(spacing: 16) {
+                            Image("person.fill")
+                                .foregroundColor(.black)
+                                .font(.system(size: 32))
+                                .padding(8)
+                                .overlay(RoundedRectangle(cornerRadius: 44))
+                            Text(user.username)
+                                .foregroundColor(.black)
+                            Spacer()
+                        }.padding(.horizontal)
+                    }
+                    Divider()
+                        .padding(.vertical, 8)
                 }
             }.navigationTitle("New Message")
                 .toolbar {
@@ -113,6 +134,7 @@ struct createNewMessageView: View {
                             presentationMode.wrappedValue.dismiss()
                         } label: {
                             Text("Cancel")
+                                .foregroundColor(.blue)
                         }
                     }
                 }

@@ -35,10 +35,10 @@ class UserViewModel: ObservableObject {
         }
     }
     
-    func signUp(email: String, password: String, username: String, likedPets: [String]) {
+    func signUp(email: String, password: String, username: String) {
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {return}
-            self?.add(User(id: self?.uuid ?? "", username: username, likedPets: likedPets))
+            self?.add(User(id: self?.uuid ?? "", username: username))
                 self?.sync()
 
         }

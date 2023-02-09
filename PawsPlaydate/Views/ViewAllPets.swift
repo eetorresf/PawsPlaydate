@@ -16,11 +16,15 @@ struct ViewAllPets: View {
     @ObservedObject var petVM = PetViewModel()
 
     var body: some View {
-        List(petVM.pets) { pet in
-            
-            CardView(pet: pet)
-            
-                .listStyle(.plain)
+        VStack {
+            Text("Paw-tential Friends")
+                .font(.system(size: 24, weight: .bold))
+            List(petVM.pets) { pet in
+                
+                CardView(pet: pet)
+                
+                    .listStyle(.plain)
+            }
         }
     }
     init() {

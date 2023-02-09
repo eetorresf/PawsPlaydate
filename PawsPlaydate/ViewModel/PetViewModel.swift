@@ -54,6 +54,22 @@ class PetViewModel: ObservableObject {
         }
     }
 
+    func removePet(pet: Pet) async -> Bool {
+        guard let petId = pet.id else {
+            print("Error")
+            return false
+        }
+        do {
+            try await db.collection("Users").document(self.uuid!).collection("pets").document(petId).delete()
+            print("pet removed from pets")
+            return true
+        } catch {
+            print("Error! \(error.localizedDescription)")
+            return false
+        }
+        
+    }
+    
     private func updateImageURL(imageURLString: String) {
         let dataRef = db.collection("Users").document(self.uuid!).collection("pets").document(pet.id!)
         
@@ -223,25 +239,6 @@ class PetViewModel: ObservableObject {
         
     }
     
-//    func addLikedPet(pet: Pet) async -> Bool {
-//        guard pet.id != nil else {
-//            print("error pet.id = nil")
-//            return false
-//        }
-//        let collectionString = "Users/\(self.uuid!)/likedPets"
-//
-//        if let id = pet.id {
-//            do {
-//                try await db.collection(collectionString).document(id).setData(from: pet)
-//                print("pet liked successfully")
-//                return true
-//            } catch {
-//                print("error. could not add pet to likedPets")
-//                return false
-//            }
-//        }
-//        return false
-//    }
     func addLikedPet(pet: Pet) {
         guard let petId = pet.id else {
             print("error pet.id is not here!")
@@ -250,12 +247,15 @@ class PetViewModel: ObservableObject {
         let dataRef = db.collection("Users").document(self.uuid!).collection("likedPets").document(petId)
         
         do {
-            try? dataRef.setData(from: pet) { err in
-
-                if err != nil {
-                    print("error! \(err!.localizedDescription)")
+//            DispatchQueue.main.async {
+                
+                try? dataRef.setData(from: pet) { err in
+                    
+                    if err != nil {
+                        print("error! \(err!.localizedDescription)")
+                    }
                 }
-            }
+//            }
         }
     }
 
@@ -272,18 +272,6 @@ class PetViewModel: ObservableObject {
             print("Error! \(error.localizedDescription)")
             return false
         }
-//        let dataRef = db.collection("Users").document(self.uuid!).collection("likedPets").document(pet.id!).delete { error in
-//            if error == nil {
-//                //No errors
-//
-//                DispatchQueue.main.async {
-//
-//                    self.pets.removeAll { pet in
-//                        return pet.id == pet.id
-//                    }
-//                }
-//            }
-//        }
         
     }
     
