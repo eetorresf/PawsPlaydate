@@ -39,8 +39,8 @@ class UserViewModel: ObservableObject {
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {return}
             self?.add(User(id: self?.uuid ?? "", username: username))
-                self?.sync()
-
+            self?.sync()
+            
         }
     }
     
@@ -59,13 +59,13 @@ class UserViewModel: ObservableObject {
         db.collection("Users").document(self.uuid!).getDocument { (document, error) in
             guard document != nil, error == nil else {return}
             DispatchQueue.main.async {
-            do {
-                try self.user = document!.data(as: User.self)
-            } catch {
-                print("Sync error: \(error)")
+                do {
+                    try self.user = document!.data(as: User.self)
+                } catch {
+                    print("Sync error: \(error)")
+                }
             }
-        }
-
+            
         }
     }
     

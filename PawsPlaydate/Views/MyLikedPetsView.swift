@@ -27,17 +27,12 @@ struct MyLikedPetsView: View {
             }
         }
     }
-    
-    //    init() {
-    //        petVM.fetchLikedPets()
-    //}
 }
 
 
 struct myLikedPetsView: View {
     
     let pet: Pet
-    //    @ObservedObject var petVM = PetViewModel()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -68,8 +63,8 @@ struct myLikedPetsView: View {
                 }
                 .font(.caption)
                 Spacer()
-                //                RemoveButton(pet: pet)
-                //                    .padding(.trailing, 20)
+                                RemoveButton(pet: pet)
+                                    .padding(.trailing, 20)
             }
             .padding()
             
@@ -79,23 +74,23 @@ struct myLikedPetsView: View {
     
 }
 
-//struct RemoveButton: View {
-//    @State var pet: Pet
-//    @EnvironmentObject var petVM: PetViewModel
-//
-//    var body: some View {
-//        Button {
-//            Task {
-//                _ = await petVM.removeLikedPet(pet: pet)
-//            }
-//        } label: {
-//            Image("trash")
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: 15)
-//        }
-//
-//    }
-//}
+struct RemoveButton: View {
+    @State var pet: Pet
+    @EnvironmentObject var petVM: PetViewModel
+
+    var body: some View {
+        Button {
+            Task {
+                _ = await petVM.removeLikedPet(pet: pet)
+            }
+        } label: {
+            Image("trash")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 15)
+        }
+
+    }
+}
 
 

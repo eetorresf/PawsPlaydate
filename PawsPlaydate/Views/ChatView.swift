@@ -22,12 +22,12 @@ struct ChatView: View {
                     }
                     .padding(.top, 10)
                     .background(.white)
-                .cornerRadius(30, corners: [.topLeft, .topRight])
-                .onChange(of: messagesManager.lastMessageId) { id in
-                    withAnimation {                        
-                        proxy.scrollTo(id, anchor: .bottom)
+                    .cornerRadius(30, corners: [.topLeft, .topRight])
+                    .onChange(of: messagesManager.lastMessageId) { id in
+                        withAnimation {                        
+                            proxy.scrollTo(id, anchor: .bottom)
+                        }
                     }
-                }
                 }
             }
             .background(Color("Purple"))

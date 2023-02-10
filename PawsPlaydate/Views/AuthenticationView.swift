@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AuthenticationView: View {
     var body: some View {
-            SignInView()
-
+        SignInView()
+        
     }
 }
 
@@ -44,34 +44,34 @@ struct SignInView: View {
             }
             
             .padding([.leading, .trailing], 25)
-                Button(action: {
-                    guard !email.isEmpty, !password.isEmpty else {
-                        return
-                    }
-                    user.signIn(email: email, password: password)
-                }) {
-                    Text("Sign In")
-                        .font(.headline)
-                        .padding()
-                }.background(Color.black)
+            Button(action: {
+                guard !email.isEmpty, !password.isEmpty else {
+                    return
+                }
+                user.signIn(email: email, password: password)
+            }) {
+                Text("Sign In")
+                    .font(.headline)
+                    .padding()
+            }.background(Color.black)
                 .foregroundColor(Color.white)
                 .cornerRadius(10)
                 .padding([.top, .bottom], 20)
-
+            
             NavigationLink("Sign Up!", destination: SignUpView())
                 .foregroundColor(Color.white)
-            }
-            
+        }
+        
         .background(
             RadialGradient(gradient: Gradient(colors: [.blue, .purple]), center: .center, startRadius: 100, endRadius: 470).edgesIgnoringSafeArea(.all))
-        }
     }
+}
 
 
 
 struct SignUpView: View {
     @EnvironmentObject var user: UserViewModel
-
+    
     @State private var email = ""
     @State private var password = ""
     @State private var username = ""
@@ -80,7 +80,7 @@ struct SignUpView: View {
     
     var body: some View {
         VStack {
-
+            
             Text("Create an Account")
                 .font(.title)
                 .foregroundColor(Color.white)
@@ -91,7 +91,7 @@ struct SignUpView: View {
                 .padding(.bottom, 50)
             Spacer()
             VStack(alignment: .leading, spacing: 15) {
-
+                
                 TextField("Username", text: $username)
                     .disableAutocorrection(true)
                     .padding()

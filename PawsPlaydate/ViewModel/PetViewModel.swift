@@ -27,10 +27,10 @@ class PetViewModel: ObservableObject {
     var uuid: String? {
         auth.currentUser?.uid
     }
-
+    
     func createPet(petName: String, breed: String, age: String, fixed: Bool, isMale: Bool, isFemale: Bool, bio: String, imageURLString: String, completion: ((String) -> Void)? = nil) {
         pet = Pet(petName: petName, breed: breed, age: age, fixed: fixed, isMale: isMale, isFemale: isFemale, bio: bio, imageURLString: imageURLString, ownerID: uuid!)
-            self.addPet(pet, completion: completion)
+        self.addPet(pet, completion: completion)
         
         
     }
@@ -40,7 +40,7 @@ class PetViewModel: ObservableObject {
         let dataRef = db.collection("Users").document(self.uuid!).collection("pets").document()
         do {
             try? dataRef.setData(from: pet) { err in
-
+                
                 if err != nil {
                     print("Loser :( ")
                 }
@@ -54,7 +54,7 @@ class PetViewModel: ObservableObject {
             }
         }
     }
-
+    
     func removePet(pet: Pet) async -> Bool {
         guard let petId = pet.id else {
             print("Error")
@@ -96,54 +96,49 @@ class PetViewModel: ObservableObject {
             }
         }
     }
-
+    
     func fetchAllPets() {
-
+        
         db.collectionGroup("pets").whereField("ownerID", isNotEqualTo: self.uuid!).getDocuments { snapshot, err in
-                if  err == nil {
-                    if let snapshot = snapshot {
-                        DispatchQueue.main.async {
+            if  err == nil {
+                if let snapshot = snapshot {
+                    DispatchQueue.main.async {
+                        
+                        self.pets = snapshot.documents.map { pet in
+                            return try! pet.data(as: Pet.self)
                             
-                            self.pets = snapshot.documents.map { pet in
-                                return try! pet.data(as: Pet.self)
-                                
-                            }
                         }
                     }
                 }
-                else {
-                    print("Unable to fetch all pets.\(err!.localizedDescription)")
-                }
             }
+            else {
+                print("Unable to fetch all pets.\(err!.localizedDescription)")
+            }
+        }
         
     }
-
+    
     
     func fetchMyPets() {
         db.collection("Users").document(self.uuid!).collection("pets").getDocuments { snapshot, err in
             if  err == nil {
                 if let snapshot = snapshot {
                     DispatchQueue.main.async {
-                            
+                        
                         self.pets = snapshot.documents.map { pet in
                             return try! pet.data(as: Pet.self)
-                    }
+                        }
                     }
                 }
             }
             else {
                 //
                 print("Unable to fetch my pets.\(err!.localizedDescription)")
-//                do {
-//                    try self.auth.signOut()
-//                } catch {
-//                    print("Error signing out user!\(error)")
-//                }
             }
         }
     }
     
-
+    
     func saveImage(image: UIImage) async -> Bool {
         let auth = Auth.auth()
         var uuid: String? {
@@ -152,17 +147,17 @@ class PetViewModel: ObservableObject {
         let photoName = UUID().uuidString
         let storage = Storage.storage()
         let storageRef = storage.reference().child("\(pet.id!)/\(photoName).jpeg")
-
-
+        
+        
         guard let resizedImage = image.jpegData(compressionQuality: 0.2) else {
             print("could not resize")
             return false
         }
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
-
+        
         var imageURLString = ""
-
+        
         do {
             let _ = try await storageRef.putDataAsync(resizedImage, metadata: metadata)
             do {
@@ -178,7 +173,7 @@ class PetViewModel: ObservableObject {
         }
         let db = Firestore.firestore()
         let collectionString = "Users/\(self.uuid!)/pets/\(pet.id!)/photos"
-
+        
         do {
             var newPet = pet
             newPet.imageURLString = imageURLString
@@ -193,9 +188,9 @@ class PetViewModel: ObservableObject {
     }
     
     func retrieveImage() {
-         //Get data from db
+        //Get data from db
         let db = Firestore.firestore()
-
+        
         db.collection("photos").getDocuments { snapshot, error in
             if error == nil && snapshot != nil {
                 var paths = [String]()
@@ -213,15 +208,15 @@ class PetViewModel: ObservableObject {
                     fileRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
                         if error == nil && data != nil {
                             if let image = UIImage(data: data!) {
-
+                                
                                 DispatchQueue.main.async {
-
+                                    
                                     self.retrievedImages.append(image)
                                 }
                             }
                         }
                     }
-
+                    
                 }
             }
         }
@@ -232,10 +227,10 @@ class PetViewModel: ObservableObject {
             if  err == nil {
                 if let snapshot = snapshot {
                     DispatchQueue.main.async {
-                            
+                        
                         self.pets = snapshot.documents.map { pet in
                             return try! pet.data(as: Pet.self)
-                    }
+                        }
                     }
                 }
             }
@@ -255,18 +250,18 @@ class PetViewModel: ObservableObject {
         let dataRef = db.collection("Users").document(self.uuid!).collection("likedPets").document(petId)
         
         do {
-//            DispatchQueue.main.async {
+            //            DispatchQueue.main.async {
+            
+            try? dataRef.setData(from: pet) { err in
                 
-                try? dataRef.setData(from: pet) { err in
-                    
-                    if err != nil {
-                        print("error! \(err!.localizedDescription)")
-                    }
+                if err != nil {
+                    print("error! \(err!.localizedDescription)")
                 }
-//            }
+            }
+            //            }
         }
     }
-
+    
     func removeLikedPet(pet: Pet) async -> Bool {
         guard let petId = pet.id else {
             print("Error")
@@ -283,7 +278,7 @@ class PetViewModel: ObservableObject {
         
     }
     
-///end
+    ///end
 }
 
 

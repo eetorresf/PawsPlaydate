@@ -34,7 +34,7 @@ struct DisplayMessagesView: View {
                 .padding()
                 
                 ScrollView {
-//                    Text("TEST")
+                    //                    Text("TEST")
                     ForEach(messagesVM.users) { user in
                         VStack {
                             NavigationLink {
@@ -47,7 +47,6 @@ struct DisplayMessagesView: View {
                                         .padding(8)
                                         .overlay(RoundedRectangle(cornerRadius: 44)
                                             .stroke(Color(.label), lineWidth: 1))
-                                    //                                Text("Message row")
                                     VStack(alignment: .leading) {
                                         Text(user.username)
                                             .font(.system(size: 16, weight: .bold))
@@ -69,7 +68,7 @@ struct DisplayMessagesView: View {
             }
             .overlay(
                 newMessageButton, alignment: .bottom
-)
+            )
             .navigationBarHidden(true)
         }
     }
@@ -79,23 +78,23 @@ struct DisplayMessagesView: View {
     private var newMessageButton: some View {
         Button {
             shouldShowNewMessageScreen.toggle()
-    } label : {
-        HStack {
-            Spacer()
-            Text("New Message")
-                .font(.system(size: 16, weight: .bold))
-            Spacer()
-        }
-        .foregroundColor(.white)
-        .padding(.vertical)
+        } label : {
+            HStack {
+                Spacer()
+                Text("New Message")
+                    .font(.system(size: 16, weight: .bold))
+                Spacer()
+            }
+            .foregroundColor(.white)
+            .padding(.vertical)
             .background(Color.blue)
             .cornerRadius(32)
             .padding(.horizontal)
             .shadow(radius: 15)
-    }
-    .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
-        createNewMessageView()
-    }
+        }
+        .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
+            createNewMessageView()
+        }
     }
     
 }

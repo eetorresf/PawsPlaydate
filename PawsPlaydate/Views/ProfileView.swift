@@ -19,9 +19,9 @@ struct ProfileView: View {
                 .font(.system(size: 24, weight: .bold))
             ViewMyPets()
                 .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    NavigationLink("Add A Pet", destination: PetDetailView(pet: petVM.pet))
-                        .foregroundColor(Color.blue)
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        NavigationLink("Add A Pet", destination: PetDetailView(pet: petVM.pet))
+                            .foregroundColor(Color.blue)
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("Sign Out") {
@@ -29,7 +29,7 @@ struct ProfileView: View {
                         }
                         .foregroundColor(.blue)
                     }
-                    }
-                    }
                 }
+        }
+    }
 }

@@ -10,9 +10,9 @@ import Firebase
 import FirebaseFirestoreSwift
 struct ViewImages: View {
     
-
+    
     @ObservedObject var petVM = PetViewModel()
-
+    
     var body: some View {
         List(petVM.pets) { pet in
             
@@ -24,4 +24,4 @@ struct ViewImages: View {
     init() {
         petVM.retrieveImage()
     }
-        }
+}

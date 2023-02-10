@@ -14,19 +14,18 @@ struct CardView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-                
-                Text(pet.petName)
-                    .font(.headline)
-                AsyncImage(url: URL(string: pet.imageURLString)) { image in
-                    image
-                        .resizable()      // Error here
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 300, height: 300)
-                } placeholder: {
-                    //put your placeholder here
-                }
-                //            Divider()
-                Spacer()
+            
+            Text(pet.petName)
+                .font(.headline)
+            AsyncImage(url: URL(string: pet.imageURLString)) { image in
+                image
+                    .resizable()      // Error here
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 300, height: 300)
+            } placeholder: {
+                //put your placeholder here
+            }
+            Spacer()
             HStack {
                 VStack(alignment: .leading){
                     Text(pet.breed)
@@ -46,36 +45,34 @@ struct CardView: View {
             }
         }
         .padding()
-
+        
     }
 }
 
 
 struct HeartButton: View {
-    //pet.id current user id
+
     
     @Binding var isLiked: Bool
-//    @State var petId: String
-//    @EnvironmentObject var userVM: UserViewModel
+
     @State var pet: Pet
     @EnvironmentObject var petVM: PetViewModel
-
+    
     private let animationDuration: Double = 0.1
     private var animationScale: CGFloat {
         isLiked ? 0.7 : 1.3
     }
     @State private var animate = false
     @State private var add = false
-
+    
     var body: some View {
         Button(action: {
             self.animate = true
             self.add.toggle()
             DispatchQueue.main.asyncAfter(deadline: .now() + self.animationDuration, execute: {
                 if self.add == true {
-//                    userVM.updateLikedPets(petId: petId)
-                    petVM.addLikedPet(pet: pet)
                     
+                    petVM.addLikedPet(pet: pet)
                     
                 } else {
                     Task {
@@ -85,8 +82,7 @@ struct HeartButton: View {
                 }
                 self.animate = false
                 self.isLiked.toggle()
-                
-                
+                                
             })
         }, label: {
             Image(systemName: isLiked ? "heart.fill" : "heart")
@@ -94,7 +90,7 @@ struct HeartButton: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 25)
                 .foregroundColor(isLiked ? .red : .gray)
-//                .padding()
+            //                .padding()
         })
         .scaleEffect(animate ? animationScale : 1)
         .animation(Animation.easeIn(duration: animationDuration), value: animate)

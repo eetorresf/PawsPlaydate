@@ -77,7 +77,6 @@ struct PhotoDetailView: View {
                         } label: {
                             Text("Save")
                         }
-                        //                            .foregroundColor(.blue)
                     }
                     .navigationTitle("Save")
                     .navigationDestination(isPresented: $readyToNavigate) {

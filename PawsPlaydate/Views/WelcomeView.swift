@@ -17,7 +17,6 @@ struct WelcomeView: View {
                     Image("user")
                     Text("User")
                 }
-//            ChatView()
             DisplayMessagesView()
                 .tabItem {
                     Image("chat")
@@ -28,13 +27,11 @@ struct WelcomeView: View {
                     Image("paw")
                     Text("Pets")
                 }
-//            signOutView()
             MyLikedPetsView()
                 .tabItem {
                     Image("heart")
                     Text("Friends")
                 }
-//                .foregroundColor(Color.blue)
         }
         
     }
@@ -48,7 +45,7 @@ struct signOutView: View {
                 user.signOut()
             }) {
                 Text("Sign Out")
-   }
+            }
         }
     }
 }
