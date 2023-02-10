@@ -12,9 +12,9 @@ import FirebaseFirestoreSwift
 
 struct ViewAllPets: View {
     
-
+    
     @ObservedObject var petVM = PetViewModel()
-
+    
     var body: some View {
         VStack {
             Text("Paw-tential Friends")
@@ -23,12 +23,11 @@ struct ViewAllPets: View {
                 
                 CardView(pet: pet)
                 
-                    .listStyle(.plain)
+            }
+            .listStyle(.plain)
+            .onAppear {
+                petVM.fetchAllPets()
             }
         }
     }
-    init() {
-        petVM.fetchAllPets()
-//        petVM.retrieveImage()
-    }
-        }
+}
