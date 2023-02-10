@@ -10,7 +10,7 @@ import PhotosUI
 import FirebaseAuth
 
 struct PhotoDetailView: View {
-
+    
     @State private var uiImageSelected = UIImage()
     @State var changeProfileImage = false
     @State var openCameraRoll = false
@@ -19,7 +19,7 @@ struct PhotoDetailView: View {
     @State private var selectedPhoto: PhotosPickerItem?
     @ObservedObject var petVM: PetViewModel
     
-
+    
     @State private var readyToNavigate : Bool = false
     
     private let auth = Auth.auth()
@@ -28,62 +28,66 @@ struct PhotoDetailView: View {
     }
     
     var body: some View {
-            
-            Form {
-                Section(header: Text("Photo")){
-                    ZStack(alignment: .bottomTrailing){
-                        Button(action: {
-                            changeProfileImage = true
-                            openCameraRoll = true
-                        }, label: {
-                            if changeProfileImage {
-                                Image(uiImage: imageSelected)
-                                    .resizable()
-                                    .frame(width: 250, height: 300)
-                            } else {
-                                Image("dog")
-                                    .resizable()
-                                    .frame(width: 250, height: 300)
-                                    .background(Color.gray)
-                            }
-                        })
-                        Image(systemName: "plus")
-                            .frame(width: 50, height: 30)
-                            .foregroundColor(.purple)
-                            .background(Color.white)
-                            .clipShape(Circle())
-                    }
-                    .sheet(isPresented: $openCameraRoll) {
-                        ImagePicker(selectedImage: $imageSelected, sourceType: .photoLibrary)
-                    }
+        
+        Form {
+            Section(header: Text("Photo")){
+                ZStack(alignment: .bottomTrailing){
+                    Button(action: {
+                        changeProfileImage = true
+                        openCameraRoll = true
+                    }, label: {
+                        if changeProfileImage {
+                            Image(uiImage: imageSelected)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 270, height: 300)
+                        } else {
+                            Image("dog")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 270, height: 300)
+                                .background(Color.gray)
+                        }
+                    })
+                    Image(systemName: "plus")
+                        .frame(width: 50, height: 30)
+                        .foregroundColor(.purple)
+                        .background(Color.white)
+                        .clipShape(Circle())
                 }
-                
+                .sheet(isPresented: $openCameraRoll) {
+                    ImagePicker(selectedImage: $imageSelected, sourceType: .photoLibrary)
+                }
             }
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    NavigationStack {
-                        VStack {
-                            Button {
-                                //code
-                                Task {
-                                                            
-                                await petVM.saveImage(image: imageSelected)
+            
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                NavigationStack {
+                    VStack {
+                        Button {
+                            //code
+                            Task {
+                                
+                                let _ = await petVM.saveImage(image: imageSelected)
+                                DispatchQueue.main.async {
+                                    readyToNavigate = true
+                                }
                             }
-                                readyToNavigate = true
-                            } label: {
-                                Text("Save")
-                            }
-//                            .foregroundColor(.blue)
+                        } label: {
+                            Text("Save")
                         }
-                        .navigationTitle("Save")
-                        .navigationDestination(isPresented: $readyToNavigate) {
-                            ProfileView()
-                        }
+                        //                            .foregroundColor(.blue)
+                    }
+                    .navigationTitle("Save")
+                    .navigationDestination(isPresented: $readyToNavigate) {
+                        ProfileView()
                     }
                 }
-                
-            }.foregroundColor(.blue)
-        }
-
+            }
+            
+        }.foregroundColor(.blue)
     }
+    
+}
 

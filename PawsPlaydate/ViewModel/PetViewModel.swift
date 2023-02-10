@@ -16,6 +16,7 @@ import UIKit
 
 class PetViewModel: ObservableObject {
     
+    
     @Published var pet = Pet()
     @Published var pets = [Pet]()
     @Published var retrievedImages = [UIImage]()
@@ -132,6 +133,12 @@ class PetViewModel: ObservableObject {
             }
             else {
                 //
+                print("Unable to fetch my pets.\(err!.localizedDescription)")
+//                do {
+//                    try self.auth.signOut()
+//                } catch {
+//                    print("Error signing out user!\(error)")
+//                }
             }
         }
     }
@@ -234,6 +241,7 @@ class PetViewModel: ObservableObject {
             }
             else {
                 //
+                print("Unable to fetch liked pets.\(err!.localizedDescription)")
             }
         }
         
@@ -280,41 +288,3 @@ class PetViewModel: ObservableObject {
 
 
 
-
-
-
-//func fetchLikedPets() {
-//    db.collection("Users").document(self.uuid!).getDocument { snapshot, error in
-//        if let error = error {
-//            print(error.localizedDescription)
-//            return
-//        }
-//
-//        if let doc = snapshot {
-//            let pets = doc.get("likedPets") as! [String]
-//            for pet in pets {
-//                print(pet)
-//            }
-//        }
-//    }
-//}
-
-//
-//func addLikedPet(pet: Pet) {
-//    let dataRef = db.collection("Users").document(self.uuid!).collection("likedPets").document()
-//    do {
-//        try? dataRef.setData(from: pet) { err in
-//
-//            if err != nil {
-//                print("Loser :( ")
-//            }
-//            dataRef.getDocument { documentSnapshot, error in
-//                do {
-//
-//                    self.pet = try! documentSnapshot!.data(as: Pet.self)
-//                }
-//
-//            }
-//        }
-//    }
-//}

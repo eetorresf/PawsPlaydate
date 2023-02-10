@@ -20,37 +20,40 @@ struct MyLikedPetsView: View {
             List(petVM.pets) { pet in
                 
                 myLikedPetsView(pet: pet)
-                    .listStyle(.plain)
+            }
+            .listStyle(.plain)
+            .onAppear {
+                petVM.fetchLikedPets()
             }
         }
     }
     
-    init() {
-        petVM.fetchLikedPets()
-}
+    //    init() {
+    //        petVM.fetchLikedPets()
+    //}
 }
 
 
 struct myLikedPetsView: View {
     
     let pet: Pet
-//    @ObservedObject var petVM = PetViewModel()
+    //    @ObservedObject var petVM = PetViewModel()
     
     var body: some View {
-            VStack(alignment: .leading) {
-                
-                Text(pet.petName)
-                    .font(.headline)
-                AsyncImage(url: URL(string: pet.imageURLString)) { image in
-                    image
-                        .resizable()      // Error here
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 300, height: 300)
-                } placeholder: {
-                    //put your placeholder here
-                }
-                Spacer()
-                
+        VStack(alignment: .leading) {
+            
+            Text(pet.petName)
+                .font(.headline)
+            AsyncImage(url: URL(string: pet.imageURLString)) { image in
+                image
+                    .resizable()      // Error here
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 300, height: 300)
+            } placeholder: {
+                //put your placeholder here
+            }
+            Spacer()
+            
             HStack {
                 VStack(alignment: .leading){
                     Text(pet.breed)
@@ -65,15 +68,15 @@ struct myLikedPetsView: View {
                 }
                 .font(.caption)
                 Spacer()
-//                RemoveButton(pet: pet)
-//                    .padding(.trailing, 20)
+                //                RemoveButton(pet: pet)
+                //                    .padding(.trailing, 20)
             }
             .padding()
             
         }
-
-    }
         
+    }
+    
 }
 
 //struct RemoveButton: View {

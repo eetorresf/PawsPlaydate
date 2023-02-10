@@ -18,13 +18,17 @@ struct ViewMyPets: View {
         var body: some View {
             List(petVM.pets) { pet in
                 myCardView(pet: pet)
+                    
             }
-
             .listStyle(.plain)
+            .onAppear {
+                petVM.fetchMyPets()
             }
-    init() {
-        petVM.fetchMyPets()
-    }
+            }
+//    init() {
+//        petVM.fetchMyPets()
+////        petVM.retrieveImage() --not loading image
+//    }
         }
     
     

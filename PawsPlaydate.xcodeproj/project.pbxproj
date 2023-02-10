@@ -13,10 +13,10 @@
 		99355A462991857A00D72238 /* DisplayMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A452991857A00D72238 /* DisplayMessagesView.swift */; };
 		99355A48299195A600D72238 /* DisplayMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A47299195A600D72238 /* DisplayMessagesViewModel.swift */; };
 		99355A4A2992EF7D00D72238 /* MyLikedPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99355A492992EF7D00D72238 /* MyLikedPetsView.swift */; };
+		99355A4D2996B39800D72238 /* Preview Content in Resources */ = {isa = PBXBuildFile; fileRef = 99355A4C2996B39800D72238 /* Preview Content */; };
 		99A49BEE298061DB00BEFB3F /* PawsPlaydateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49BED298061DB00BEFB3F /* PawsPlaydateApp.swift */; };
 		99A49BF0298061DB00BEFB3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A49BEF298061DB00BEFB3F /* ContentView.swift */; };
 		99A49BF2298061DC00BEFB3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99A49BF1298061DC00BEFB3F /* Assets.xcassets */; };
-		99A49BF5298061DC00BEFB3F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99A49BF4298061DC00BEFB3F /* Preview Assets.xcassets */; };
 		99A49BFC298062FA00BEFB3F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 99A49BFB298062FA00BEFB3F /* GoogleService-Info.plist */; };
 		99A49BFF2980637E00BEFB3F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 99A49BFE2980637E00BEFB3F /* FirebaseAnalytics */; };
 		99A49C012980637E00BEFB3F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 99A49C002980637E00BEFB3F /* FirebaseAuth */; };
@@ -49,11 +49,11 @@
 		99355A452991857A00D72238 /* DisplayMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessagesView.swift; sourceTree = "<group>"; };
 		99355A47299195A600D72238 /* DisplayMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessagesViewModel.swift; sourceTree = "<group>"; };
 		99355A492992EF7D00D72238 /* MyLikedPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLikedPetsView.swift; sourceTree = "<group>"; };
+		99355A4C2996B39800D72238 /* Preview Content */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Preview Content"; sourceTree = "<group>"; };
 		99A49BEA298061DB00BEFB3F /* PawsPlaydate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PawsPlaydate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99A49BED298061DB00BEFB3F /* PawsPlaydateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawsPlaydateApp.swift; sourceTree = "<group>"; };
 		99A49BEF298061DB00BEFB3F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		99A49BF1298061DC00BEFB3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		99A49BF4298061DC00BEFB3F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		99A49BFB298062FA00BEFB3F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		99A49C0429818A1100BEFB3F /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
 		99A49C0629819FEA00BEFB3F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -90,6 +90,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		99355A4B2996A87700D72238 /* Additional */ = {
+			isa = PBXGroup;
+			children = (
+				99A49C0429818A1100BEFB3F /* SelectButton.swift */,
+				99A49C0629819FEA00BEFB3F /* ImagePicker.swift */,
+				99A49C0E2982D0E300BEFB3F /* DataManager.swift */,
+				99355A43298D7F4300D72238 /* MessagesManager.swift */,
+			);
+			path = Additional;
+			sourceTree = "<group>";
+		};
 		99A49BE1298061DB00BEFB3F = {
 			isa = PBXGroup;
 			children = (
@@ -113,25 +124,14 @@
 				99A49BFB298062FA00BEFB3F /* GoogleService-Info.plist */,
 				99A49BED298061DB00BEFB3F /* PawsPlaydateApp.swift */,
 				99A49BEF298061DB00BEFB3F /* ContentView.swift */,
-				99A49C0429818A1100BEFB3F /* SelectButton.swift */,
 				99A49BF1298061DC00BEFB3F /* Assets.xcassets */,
+				99355A4C2996B39800D72238 /* Preview Content */,
+				99355A4B2996A87700D72238 /* Additional */,
 				99A49C2F2984BF9D00BEFB3F /* Views */,
 				99A49C2A2984B5FD00BEFB3F /* ViewModel */,
 				99A49C21298324B800BEFB3F /* Model */,
-				99A49BF3298061DC00BEFB3F /* Preview Content */,
-				99A49C0629819FEA00BEFB3F /* ImagePicker.swift */,
-				99A49C0E2982D0E300BEFB3F /* DataManager.swift */,
-				99355A43298D7F4300D72238 /* MessagesManager.swift */,
 			);
 			path = PawsPlaydate;
-			sourceTree = "<group>";
-		};
-		99A49BF3298061DC00BEFB3F /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				99A49BF4298061DC00BEFB3F /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		99A49C1E2982E98B00BEFB3F /* Frameworks */ = {
@@ -249,7 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99A49BF5298061DC00BEFB3F /* Preview Assets.xcassets in Resources */,
+				99355A4D2996B39800D72238 /* Preview Content in Resources */,
 				99A49BF2298061DC00BEFB3F /* Assets.xcassets in Resources */,
 				99A49BFC298062FA00BEFB3F /* GoogleService-Info.plist in Resources */,
 			);

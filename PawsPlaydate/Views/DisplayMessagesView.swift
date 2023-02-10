@@ -35,7 +35,7 @@ struct DisplayMessagesView: View {
                 
                 ScrollView {
 //                    Text("TEST")
-                    ForEach(0..<5, id: \.self) { num in
+                    ForEach(messagesVM.users) { user in
                         VStack {
                             NavigationLink {
                                 ChatView()
@@ -49,7 +49,7 @@ struct DisplayMessagesView: View {
                                             .stroke(Color(.label), lineWidth: 1))
                                     //                                Text("Message row")
                                     VStack(alignment: .leading) {
-                                        Text("Username")
+                                        Text(user.username)
                                             .font(.system(size: 16, weight: .bold))
                                         Text("Message sent to user")
                                             .font(.system(size: 14))
